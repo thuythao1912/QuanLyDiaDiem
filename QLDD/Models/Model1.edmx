@@ -1,0 +1,639 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="quanlydiadiemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BAIDANG">
+          <Key>
+            <PropertyRef Name="BAIDANG_ID" />
+          </Key>
+          <Property Name="BAIDANG_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NHANVIEN_ID" Type="nvarchar" MaxLength="255" />
+          <Property Name="DIADIEM_ID" Type="int" />
+          <Property Name="BAIDANG_NGAY" Type="datetime" />
+          <Property Name="BAIDANG_DUYET" Type="int" />
+          <Property Name="BAIDANG_NOIDUNG" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DIADIEM">
+          <Key>
+            <PropertyRef Name="DIADIEM_ID" />
+          </Key>
+          <Property Name="DIADIEM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KHACHHANG_ID" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LOAI_ID" Type="int" Nullable="false" />
+          <Property Name="DIADIEM_TEN" Type="nvarchar" MaxLength="255" />
+          <Property Name="DIADIEM_DIACHI" Type="nvarchar" MaxLength="255" />
+          <Property Name="DIADIEM_WEB" Type="nvarchar" MaxLength="255" />
+          <Property Name="DIADIEM_MOTA" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="HINHDIADIEM">
+          <Key>
+            <PropertyRef Name="HDD_ID" />
+          </Key>
+          <Property Name="HDD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DIADIEM_ID" Type="int" Nullable="false" />
+          <Property Name="HDD_LINK" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="HINHSANPHAM">
+          <Key>
+            <PropertyRef Name="HSP_ID" />
+          </Key>
+          <Property Name="HSP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SANPHAM_ID" Type="int" Nullable="false" />
+          <Property Name="HSP_LINK" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="KHACHHANG_ID" />
+          </Key>
+          <Property Name="KHACHHANG_ID" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="KHACHHANG_TEN" Type="nvarchar" MaxLength="255" />
+          <Property Name="KHACHHANG_SDT" Type="nvarchar" MaxLength="255" />
+          <Property Name="KHACHHANG_EMAIL" Type="nvarchar" MaxLength="255" />
+          <Property Name="KHACHHANG_PASSWORD" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LOAI">
+          <Key>
+            <PropertyRef Name="LOAI_ID" />
+          </Key>
+          <Property Name="LOAI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOAI_TEN" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="NHANVIEN_ID" />
+          </Key>
+          <Property Name="NHANVIEN_ID" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="NHANVIEN_TEN" Type="nvarchar" MaxLength="255" />
+          <Property Name="NHANVIEN_NGAYSINH" Type="date" />
+          <Property Name="NHANVIEN_DIACHI" Type="nvarchar" MaxLength="255" />
+          <Property Name="NHANVIEN_PHAI" Type="nvarchar" MaxLength="255" />
+          <Property Name="NHANVIEN_EMAIL" Type="nvarchar" MaxLength="255" />
+          <Property Name="NHANVIEN_SDT" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SANPHAM">
+          <Key>
+            <PropertyRef Name="SANPHAM_ID" />
+          </Key>
+          <Property Name="SANPHAM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DIADIEM_ID" Type="int" Nullable="false" />
+          <Property Name="SANPHAM_TEN" Type="nvarchar" MaxLength="255" />
+          <Property Name="SANPHAM_MOTA" Type="nvarchar" MaxLength="255" />
+          <Property Name="SANPHAM_GIA" Type="float" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TOADO">
+          <Key>
+            <PropertyRef Name="TOADO_ID" />
+          </Key>
+          <Property Name="TOADO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TOADO_LAT" Type="float" />
+          <Property Name="TOADO_LNG" Type="float" />
+          <Property Name="DIADIEM_ID" Type="int" />
+        </EntityType>
+        <Association Name="FK__TOADO__DIADIEM_I__49C3F6B7">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="0..1" />
+          <End Role="TOADO" Type="Self.TOADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Principal>
+            <Dependent Role="TOADO">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BAIDANG_BD_DD_DIADIEM">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="0..1" />
+          <End Role="BAIDANG" Type="Self.BAIDANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Principal>
+            <Dependent Role="BAIDANG">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BAIDANG_BD_NV_NHANVIEN">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+          <End Role="BAIDANG" Type="Self.BAIDANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="NHANVIEN_ID" />
+            </Principal>
+            <Dependent Role="BAIDANG">
+              <PropertyRef Name="NHANVIEN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIADIEM_KH_DD_KHACHHAN">
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="1" />
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="KHACHHANG_ID" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="KHACHHANG_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIADIEM_LOAI_DD_LOAI">
+          <End Role="LOAI" Type="Self.LOAI" Multiplicity="1" />
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAI">
+              <PropertyRef Name="LOAI_ID" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="LOAI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HINHDIAD_DD_HA_DIADIEM">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="1" />
+          <End Role="HINHDIADIEM" Type="Self.HINHDIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Principal>
+            <Dependent Role="HINHDIADIEM">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HINHSANP_RELATIONS_SANPHAM">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
+          <End Role="HINHSANPHAM" Type="Self.HINHSANPHAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="SANPHAM_ID" />
+            </Principal>
+            <Dependent Role="HINHSANPHAM">
+              <PropertyRef Name="SANPHAM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SANPHAM_DD_SP_DIADIEM">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="1" />
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Principal>
+            <Dependent Role="SANPHAM">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="quanlydiadiemModelStoreContainer">
+          <EntitySet Name="BAIDANG" EntityType="Self.BAIDANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIADIEM" EntityType="Self.DIADIEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HINHDIADIEM" EntityType="Self.HINHDIADIEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HINHSANPHAM" EntityType="Self.HINHSANPHAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAI" EntityType="Self.LOAI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TOADO" EntityType="Self.TOADO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TOADO__DIADIEM_I__49C3F6B7" Association="Self.FK__TOADO__DIADIEM_I__49C3F6B7">
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+            <End Role="TOADO" EntitySet="TOADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BAIDANG_BD_DD_DIADIEM" Association="Self.FK_BAIDANG_BD_DD_DIADIEM">
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+            <End Role="BAIDANG" EntitySet="BAIDANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BAIDANG_BD_NV_NHANVIEN" Association="Self.FK_BAIDANG_BD_NV_NHANVIEN">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="BAIDANG" EntitySet="BAIDANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIADIEM_KH_DD_KHACHHAN" Association="Self.FK_DIADIEM_KH_DD_KHACHHAN">
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIADIEM_LOAI_DD_LOAI" Association="Self.FK_DIADIEM_LOAI_DD_LOAI">
+            <End Role="LOAI" EntitySet="LOAI" />
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HINHDIAD_DD_HA_DIADIEM" Association="Self.FK_HINHDIAD_DD_HA_DIADIEM">
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+            <End Role="HINHDIADIEM" EntitySet="HINHDIADIEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HINHSANP_RELATIONS_SANPHAM" Association="Self.FK_HINHSANP_RELATIONS_SANPHAM">
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+            <End Role="HINHSANPHAM" EntitySet="HINHSANPHAM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SANPHAM_DD_SP_DIADIEM" Association="Self.FK_SANPHAM_DD_SP_DIADIEM">
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="quanlydiadiemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BAIDANG">
+          <Key>
+            <PropertyRef Name="BAIDANG_ID" />
+          </Key>
+          <Property Name="BAIDANG_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NHANVIEN_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DIADIEM_ID" Type="Int32" />
+          <Property Name="BAIDANG_NGAY" Type="DateTime" Precision="3" />
+          <Property Name="BAIDANG_DUYET" Type="Int32" />
+          <Property Name="BAIDANG_NOIDUNG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DIADIEM" Relationship="Self.FK_BAIDANG_BD_DD_DIADIEM" FromRole="BAIDANG" ToRole="DIADIEM" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK_BAIDANG_BD_NV_NHANVIEN" FromRole="BAIDANG" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="DIADIEM">
+          <Key>
+            <PropertyRef Name="DIADIEM_ID" />
+          </Key>
+          <Property Name="DIADIEM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KHACHHANG_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LOAI_ID" Type="Int32" Nullable="false" />
+          <Property Name="DIADIEM_TEN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DIADIEM_DIACHI" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DIADIEM_WEB" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DIADIEM_MOTA" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BAIDANGs" Relationship="Self.FK_BAIDANG_BD_DD_DIADIEM" FromRole="DIADIEM" ToRole="BAIDANG" />
+          <NavigationProperty Name="TOADOes" Relationship="Self.FK__TOADO__DIADIEM_I__49C3F6B7" FromRole="DIADIEM" ToRole="TOADO" />
+          <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_DIADIEM_KH_DD_KHACHHAN" FromRole="DIADIEM" ToRole="KHACHHANG" />
+          <NavigationProperty Name="LOAI" Relationship="Self.FK_DIADIEM_LOAI_DD_LOAI" FromRole="DIADIEM" ToRole="LOAI" />
+          <NavigationProperty Name="HINHDIADIEMs" Relationship="Self.FK_HINHDIAD_DD_HA_DIADIEM" FromRole="DIADIEM" ToRole="HINHDIADIEM" />
+          <NavigationProperty Name="SANPHAMs" Relationship="Self.FK_SANPHAM_DD_SP_DIADIEM" FromRole="DIADIEM" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="HINHDIADIEM">
+          <Key>
+            <PropertyRef Name="HDD_ID" />
+          </Key>
+          <Property Name="HDD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DIADIEM_ID" Type="Int32" Nullable="false" />
+          <Property Name="HDD_LINK" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DIADIEM" Relationship="Self.FK_HINHDIAD_DD_HA_DIADIEM" FromRole="HINHDIADIEM" ToRole="DIADIEM" />
+        </EntityType>
+        <EntityType Name="HINHSANPHAM">
+          <Key>
+            <PropertyRef Name="HSP_ID" />
+          </Key>
+          <Property Name="HSP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SANPHAM_ID" Type="Int32" Nullable="false" />
+          <Property Name="HSP_LINK" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SANPHAM" Relationship="Self.FK_HINHSANP_RELATIONS_SANPHAM" FromRole="HINHSANPHAM" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="KHACHHANG_ID" />
+          </Key>
+          <Property Name="KHACHHANG_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KHACHHANG_TEN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="KHACHHANG_SDT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="KHACHHANG_EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="KHACHHANG_PASSWORD" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DIADIEMs" Relationship="Self.FK_DIADIEM_KH_DD_KHACHHAN" FromRole="KHACHHANG" ToRole="DIADIEM" />
+        </EntityType>
+        <EntityType Name="LOAI">
+          <Key>
+            <PropertyRef Name="LOAI_ID" />
+          </Key>
+          <Property Name="LOAI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOAI_TEN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DIADIEMs" Relationship="Self.FK_DIADIEM_LOAI_DD_LOAI" FromRole="LOAI" ToRole="DIADIEM" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="NHANVIEN_ID" />
+          </Key>
+          <Property Name="NHANVIEN_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NHANVIEN_TEN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NHANVIEN_NGAYSINH" Type="DateTime" Precision="0" />
+          <Property Name="NHANVIEN_DIACHI" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NHANVIEN_PHAI" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NHANVIEN_EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NHANVIEN_SDT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BAIDANGs" Relationship="Self.FK_BAIDANG_BD_NV_NHANVIEN" FromRole="NHANVIEN" ToRole="BAIDANG" />
+        </EntityType>
+        <EntityType Name="SANPHAM">
+          <Key>
+            <PropertyRef Name="SANPHAM_ID" />
+          </Key>
+          <Property Name="SANPHAM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DIADIEM_ID" Type="Int32" Nullable="false" />
+          <Property Name="SANPHAM_TEN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SANPHAM_MOTA" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SANPHAM_GIA" Type="Double" />
+          <NavigationProperty Name="DIADIEM" Relationship="Self.FK_SANPHAM_DD_SP_DIADIEM" FromRole="SANPHAM" ToRole="DIADIEM" />
+          <NavigationProperty Name="HINHSANPHAMs" Relationship="Self.FK_HINHSANP_RELATIONS_SANPHAM" FromRole="SANPHAM" ToRole="HINHSANPHAM" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TOADO">
+          <Key>
+            <PropertyRef Name="TOADO_ID" />
+          </Key>
+          <Property Name="TOADO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TOADO_LAT" Type="Double" />
+          <Property Name="TOADO_LNG" Type="Double" />
+          <Property Name="DIADIEM_ID" Type="Int32" />
+          <NavigationProperty Name="DIADIEM" Relationship="Self.FK__TOADO__DIADIEM_I__49C3F6B7" FromRole="TOADO" ToRole="DIADIEM" />
+        </EntityType>
+        <Association Name="FK_BAIDANG_BD_DD_DIADIEM">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="0..1" />
+          <End Role="BAIDANG" Type="Self.BAIDANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Principal>
+            <Dependent Role="BAIDANG">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BAIDANG_BD_NV_NHANVIEN">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+          <End Role="BAIDANG" Type="Self.BAIDANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="NHANVIEN_ID" />
+            </Principal>
+            <Dependent Role="BAIDANG">
+              <PropertyRef Name="NHANVIEN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TOADO__DIADIEM_I__49C3F6B7">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="0..1" />
+          <End Role="TOADO" Type="Self.TOADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Principal>
+            <Dependent Role="TOADO">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIADIEM_KH_DD_KHACHHAN">
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="1" />
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="KHACHHANG_ID" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="KHACHHANG_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIADIEM_LOAI_DD_LOAI">
+          <End Role="LOAI" Type="Self.LOAI" Multiplicity="1" />
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAI">
+              <PropertyRef Name="LOAI_ID" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="LOAI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HINHDIAD_DD_HA_DIADIEM">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="1" />
+          <End Role="HINHDIADIEM" Type="Self.HINHDIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Principal>
+            <Dependent Role="HINHDIADIEM">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SANPHAM_DD_SP_DIADIEM">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="1" />
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Principal>
+            <Dependent Role="SANPHAM">
+              <PropertyRef Name="DIADIEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HINHSANP_RELATIONS_SANPHAM">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
+          <End Role="HINHSANPHAM" Type="Self.HINHSANPHAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="SANPHAM_ID" />
+            </Principal>
+            <Dependent Role="HINHSANPHAM">
+              <PropertyRef Name="SANPHAM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QUANLYDIADIEMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BAIDANGs" EntityType="Self.BAIDANG" />
+          <EntitySet Name="DIADIEMs" EntityType="Self.DIADIEM" />
+          <EntitySet Name="HINHDIADIEMs" EntityType="Self.HINHDIADIEM" />
+          <EntitySet Name="HINHSANPHAMs" EntityType="Self.HINHSANPHAM" />
+          <EntitySet Name="KHACHHANGs" EntityType="Self.KHACHHANG" />
+          <EntitySet Name="LOAIs" EntityType="Self.LOAI" />
+          <EntitySet Name="NHANVIENs" EntityType="Self.NHANVIEN" />
+          <EntitySet Name="SANPHAMs" EntityType="Self.SANPHAM" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TOADOes" EntityType="Self.TOADO" />
+          <AssociationSet Name="FK_BAIDANG_BD_DD_DIADIEM" Association="Self.FK_BAIDANG_BD_DD_DIADIEM">
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+            <End Role="BAIDANG" EntitySet="BAIDANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BAIDANG_BD_NV_NHANVIEN" Association="Self.FK_BAIDANG_BD_NV_NHANVIEN">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="BAIDANG" EntitySet="BAIDANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TOADO__DIADIEM_I__49C3F6B7" Association="Self.FK__TOADO__DIADIEM_I__49C3F6B7">
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+            <End Role="TOADO" EntitySet="TOADOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIADIEM_KH_DD_KHACHHAN" Association="Self.FK_DIADIEM_KH_DD_KHACHHAN">
+            <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIADIEM_LOAI_DD_LOAI" Association="Self.FK_DIADIEM_LOAI_DD_LOAI">
+            <End Role="LOAI" EntitySet="LOAIs" />
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HINHDIAD_DD_HA_DIADIEM" Association="Self.FK_HINHDIAD_DD_HA_DIADIEM">
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+            <End Role="HINHDIADIEM" EntitySet="HINHDIADIEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SANPHAM_DD_SP_DIADIEM" Association="Self.FK_SANPHAM_DD_SP_DIADIEM">
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HINHSANP_RELATIONS_SANPHAM" Association="Self.FK_HINHSANP_RELATIONS_SANPHAM">
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+            <End Role="HINHSANPHAM" EntitySet="HINHSANPHAMs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="quanlydiadiemModelStoreContainer" CdmEntityContainer="QUANLYDIADIEMEntities">
+          <EntitySetMapping Name="BAIDANGs">
+            <EntityTypeMapping TypeName="quanlydiadiemModel.BAIDANG">
+              <MappingFragment StoreEntitySet="BAIDANG">
+                <ScalarProperty Name="BAIDANG_ID" ColumnName="BAIDANG_ID" />
+                <ScalarProperty Name="NHANVIEN_ID" ColumnName="NHANVIEN_ID" />
+                <ScalarProperty Name="DIADIEM_ID" ColumnName="DIADIEM_ID" />
+                <ScalarProperty Name="BAIDANG_NGAY" ColumnName="BAIDANG_NGAY" />
+                <ScalarProperty Name="BAIDANG_DUYET" ColumnName="BAIDANG_DUYET" />
+                <ScalarProperty Name="BAIDANG_NOIDUNG" ColumnName="BAIDANG_NOIDUNG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIADIEMs">
+            <EntityTypeMapping TypeName="quanlydiadiemModel.DIADIEM">
+              <MappingFragment StoreEntitySet="DIADIEM">
+                <ScalarProperty Name="DIADIEM_ID" ColumnName="DIADIEM_ID" />
+                <ScalarProperty Name="KHACHHANG_ID" ColumnName="KHACHHANG_ID" />
+                <ScalarProperty Name="LOAI_ID" ColumnName="LOAI_ID" />
+                <ScalarProperty Name="DIADIEM_TEN" ColumnName="DIADIEM_TEN" />
+                <ScalarProperty Name="DIADIEM_DIACHI" ColumnName="DIADIEM_DIACHI" />
+                <ScalarProperty Name="DIADIEM_WEB" ColumnName="DIADIEM_WEB" />
+                <ScalarProperty Name="DIADIEM_MOTA" ColumnName="DIADIEM_MOTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HINHDIADIEMs">
+            <EntityTypeMapping TypeName="quanlydiadiemModel.HINHDIADIEM">
+              <MappingFragment StoreEntitySet="HINHDIADIEM">
+                <ScalarProperty Name="HDD_ID" ColumnName="HDD_ID" />
+                <ScalarProperty Name="DIADIEM_ID" ColumnName="DIADIEM_ID" />
+                <ScalarProperty Name="HDD_LINK" ColumnName="HDD_LINK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HINHSANPHAMs">
+            <EntityTypeMapping TypeName="quanlydiadiemModel.HINHSANPHAM">
+              <MappingFragment StoreEntitySet="HINHSANPHAM">
+                <ScalarProperty Name="HSP_ID" ColumnName="HSP_ID" />
+                <ScalarProperty Name="SANPHAM_ID" ColumnName="SANPHAM_ID" />
+                <ScalarProperty Name="HSP_LINK" ColumnName="HSP_LINK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHACHHANGs">
+            <EntityTypeMapping TypeName="quanlydiadiemModel.KHACHHANG">
+              <MappingFragment StoreEntitySet="KHACHHANG">
+                <ScalarProperty Name="KHACHHANG_ID" ColumnName="KHACHHANG_ID" />
+                <ScalarProperty Name="KHACHHANG_TEN" ColumnName="KHACHHANG_TEN" />
+                <ScalarProperty Name="KHACHHANG_SDT" ColumnName="KHACHHANG_SDT" />
+                <ScalarProperty Name="KHACHHANG_EMAIL" ColumnName="KHACHHANG_EMAIL" />
+                <ScalarProperty Name="KHACHHANG_PASSWORD" ColumnName="KHACHHANG_PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAIs">
+            <EntityTypeMapping TypeName="quanlydiadiemModel.LOAI">
+              <MappingFragment StoreEntitySet="LOAI">
+                <ScalarProperty Name="LOAI_ID" ColumnName="LOAI_ID" />
+                <ScalarProperty Name="LOAI_TEN" ColumnName="LOAI_TEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHANVIENs">
+            <EntityTypeMapping TypeName="quanlydiadiemModel.NHANVIEN">
+              <MappingFragment StoreEntitySet="NHANVIEN">
+                <ScalarProperty Name="NHANVIEN_ID" ColumnName="NHANVIEN_ID" />
+                <ScalarProperty Name="NHANVIEN_TEN" ColumnName="NHANVIEN_TEN" />
+                <ScalarProperty Name="NHANVIEN_NGAYSINH" ColumnName="NHANVIEN_NGAYSINH" />
+                <ScalarProperty Name="NHANVIEN_DIACHI" ColumnName="NHANVIEN_DIACHI" />
+                <ScalarProperty Name="NHANVIEN_PHAI" ColumnName="NHANVIEN_PHAI" />
+                <ScalarProperty Name="NHANVIEN_EMAIL" ColumnName="NHANVIEN_EMAIL" />
+                <ScalarProperty Name="NHANVIEN_SDT" ColumnName="NHANVIEN_SDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SANPHAMs">
+            <EntityTypeMapping TypeName="quanlydiadiemModel.SANPHAM">
+              <MappingFragment StoreEntitySet="SANPHAM">
+                <ScalarProperty Name="SANPHAM_ID" ColumnName="SANPHAM_ID" />
+                <ScalarProperty Name="DIADIEM_ID" ColumnName="DIADIEM_ID" />
+                <ScalarProperty Name="SANPHAM_TEN" ColumnName="SANPHAM_TEN" />
+                <ScalarProperty Name="SANPHAM_MOTA" ColumnName="SANPHAM_MOTA" />
+                <ScalarProperty Name="SANPHAM_GIA" ColumnName="SANPHAM_GIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="quanlydiadiemModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TOADOes">
+            <EntityTypeMapping TypeName="quanlydiadiemModel.TOADO">
+              <MappingFragment StoreEntitySet="TOADO">
+                <ScalarProperty Name="TOADO_ID" ColumnName="TOADO_ID" />
+                <ScalarProperty Name="TOADO_LAT" ColumnName="TOADO_LAT" />
+                <ScalarProperty Name="TOADO_LNG" ColumnName="TOADO_LNG" />
+                <ScalarProperty Name="DIADIEM_ID" ColumnName="DIADIEM_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

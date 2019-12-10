@@ -1,0 +1,46 @@
+﻿@model QLDD.Models.SANPHAM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>THÔNG TIN CHI TIẾT</h2>
+<div>
+    <h4>@Html.DisplayFor(model => model.SANPHAM_TEN)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+       
+
+        <dt>
+            MÔ TẢ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SANPHAM_MOTA)
+        </dd>
+
+        <dt>
+            GIÁ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SANPHAM_GIA)
+        </dd>
+
+        <dt>
+            TÊN ĐỊA ĐIỂM
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIADIEM.DIADIEM_TEN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59;">@Html.ActionLink("Edit", "Edit", new { id = Model.SANPHAM_ID })</button>
+    <button class="btn btn-primary" style="width:100px;height:32px;background-color:#394A59;">@Html.ActionLink("Back to List", "Index")</button>
+</p>

@@ -1,0 +1,49 @@
+﻿@model  PagedList.IPagedList<QLDD.Models.LOAI>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DANH SÁCH LOẠI HÌNH</h2>
+
+<div style="float:right">
+    <button class="btn btn-primary" style="width:100px;height:32px;background-color:#394A59;color:#fff">
+        @Html.ActionLink("Thêm mới", "Create")
+    </button>
+</div>
+<table class="table table-striped table-advance table-hover">
+    <tr>
+        <th style="background-color:#394A59;color:#fff">
+            TÊN LOẠI
+        </th>
+        <th style="background-color:#394A59;color:#fff">THAO TÁC</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LOAI_TEN)
+            </td>
+            <td>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59;">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.LOAI_ID })
+                </button>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Details", "Details", new { id = item.LOAI_ID })
+                </button>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Delete", "Delete", new { id = item.LOAI_ID })
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page }))
+<!-- Kết thúc -->

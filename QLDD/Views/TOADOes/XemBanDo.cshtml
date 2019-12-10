@@ -1,0 +1,54 @@
+﻿@model QLDD.Models.TOADO
+
+@{
+    Layout = null;
+}
+    <div class="span10" style="border: solid 1px #eee;">
+        <div style="display: flex; align-items:center; justify-content:space-between; border-bottom: solid 1px #eee;padding: 0px 15px">
+            <h3 style="color: #c82933"><strong>VỊ TRÍ ĐỊA ĐIỂM: <span style="color: #181A1C; margin-left:20px">@Html.DisplayFor(model => model.DIADIEM.DIADIEM_TEN)</span></strong></h3>
+        </div>
+        <div style="display:flex; justify-content:center; align-items:center">
+            <table width="50%">
+                <tr>
+                    <th>TỌA ĐỘ LATTITUDE</th>
+                    <td style="padding: 10px 0px">@Html.DisplayFor(model => model.TOADO_LAT)</td>
+                </tr>
+                <tr>
+                    <th>TỌA ĐỘ LONGITUDE</th>
+                    <td style="padding: 10px 0px">@Html.DisplayFor(model => model.TOADO_LNG)</td>
+                </tr>
+            </table>
+            <button class="btn btn-info" onclick="addMap(@TempData["ID"], '@TempData["IDKH"]')">Cập nhật vị trí</button>
+
+        </div>
+        <div id="googleMap" style="width:100%;height:400px;"></div>
+    </div>
+    
+        <script src="~/Scripts/jquery-3.3.1.js"></script>
+        <script>
+            function myMap() {
+                //load map
+                var mapProp = {
+                    center: new google.maps.LatLng(@Html.DisplayFor(model => model.TOADO_LAT), @Html.DisplayFor(model => model.TOADO_LNG)),
+                    zoom: 16,
+
+                };
+                var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+                //place marker
+                var marker = new google.maps.Marker({ position: {lat:@Html.DisplayFor(model => model.TOADO_LAT), lng:@Html.DisplayFor(model => model.TOADO_LNG)  }, map: map, title: 'Vị trí địa điểm'});
+            }
+            function addMap(dd, kh) {
+                $.ajax({
+                method: 'get',
+                url: '/TOADOES/Create',
+                data: { id: dd, idkh: kh },
+                success: function (res) {
+                    $("#result").html(res);
+                }
+        })
+            }
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr5qwgemJp4LtodR8lvXg382V-cDFK3bY&callback=myMap">
+        </script>

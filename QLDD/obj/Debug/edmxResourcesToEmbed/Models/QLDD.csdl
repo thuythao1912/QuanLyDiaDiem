@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QUANLYDIADIEMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BAIDANG">
+    <Key>
+      <PropertyRef Name="BAIDANG_ID" />
+    </Key>
+    <Property Name="BAIDANG_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DIADIEM_ID" Type="Int32" Nullable="false" />
+    <Property Name="KHACHHANG_ID" Type="Int32" />
+    <Property Name="BAIDANG_NGAY" Type="DateTime" Precision="3" />
+    <Property Name="BAIDANG_DUYET" Type="Boolean" />
+    <NavigationProperty Name="DIADIEM" Relationship="Self.FK__BAIDANG__DIADIEM__59FA5E80" FromRole="BAIDANG" ToRole="DIADIEM" />
+    <NavigationProperty Name="KHACHHANG" Relationship="Self.FK__BAIDANG__KHACHHA__5AEE82B9" FromRole="BAIDANG" ToRole="KHACHHANG" />
+  </EntityType>
+  <EntityType Name="DIADIEM">
+    <Key>
+      <PropertyRef Name="DIADIEM_ID" />
+    </Key>
+    <Property Name="DIADIEM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LOAI_ID" Type="Int32" />
+    <Property Name="NHANVIEN_ID" Type="Int32" />
+    <Property Name="DIADIEM_TEN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DIADIEM_DIACHI" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DIADIEM_LINK" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DIADIEM_MOTA" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DIADIEM_TRANGTHAI" Type="Boolean" />
+    <Property Name="KHACHHANG_ID" Type="Int32" />
+    <NavigationProperty Name="BAIDANGs" Relationship="Self.FK__BAIDANG__DIADIEM__59FA5E80" FromRole="DIADIEM" ToRole="BAIDANG" />
+    <NavigationProperty Name="KHACHHANG" Relationship="Self.FK__DIADIEM__KHACHHA__59063A47" FromRole="DIADIEM" ToRole="KHACHHANG" />
+    <NavigationProperty Name="LOAI" Relationship="Self.FK__DIADIEM__LOAI_ID__5812160E" FromRole="DIADIEM" ToRole="LOAI" />
+    <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__DIADIEM__NHANVIE__571DF1D5" FromRole="DIADIEM" ToRole="NHANVIEN" />
+    <NavigationProperty Name="SP_DV" Relationship="Self.FK__SP_DV__DIADIEM_I__5CD6CB2B" FromRole="DIADIEM" ToRole="SP_DV" />
+  </EntityType>
+  <EntityType Name="HINHANH">
+    <Key>
+      <PropertyRef Name="HINHANH_ID" />
+    </Key>
+    <Property Name="HINHANH_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SP_ID" Type="Int32" />
+    <Property Name="HINHANH_LINK" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SP_DV" Relationship="Self.FK__HINHANH__SP_ID__5BE2A6F2" FromRole="HINHANH" ToRole="SP_DV" />
+  </EntityType>
+  <EntityType Name="KHACHHANG">
+    <Key>
+      <PropertyRef Name="KHACHHANG_ID" />
+    </Key>
+    <Property Name="KHACHHANG_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KHACHHANG_TEN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="KHACHHANG_SDT" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="KHACHHANG_EMAIL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="KHACHHANG_PASSWORD" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BAIDANGs" Relationship="Self.FK__BAIDANG__KHACHHA__5AEE82B9" FromRole="KHACHHANG" ToRole="BAIDANG" />
+    <NavigationProperty Name="DIADIEMs" Relationship="Self.FK__DIADIEM__KHACHHA__59063A47" FromRole="KHACHHANG" ToRole="DIADIEM" />
+  </EntityType>
+  <EntityType Name="LOAI">
+    <Key>
+      <PropertyRef Name="LOAI_ID" />
+    </Key>
+    <Property Name="LOAI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LOAI_TEN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="DIADIEMs" Relationship="Self.FK__DIADIEM__LOAI_ID__5812160E" FromRole="LOAI" ToRole="DIADIEM" />
+  </EntityType>
+  <EntityType Name="NHANVIEN">
+    <Key>
+      <PropertyRef Name="NHANVIEN_ID" />
+    </Key>
+    <Property Name="NHANVIEN_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NHANVIEN_TEN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NHANVIEN_NGAYSINH" Type="DateTime" Precision="0" />
+    <Property Name="NHANVIEN_DIACHI" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="NHANVIEN_PHAI" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="NHANVIEN_EMAIL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="NHANVIEN_SDT" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DIADIEMs" Relationship="Self.FK__DIADIEM__NHANVIE__571DF1D5" FromRole="NHANVIEN" ToRole="DIADIEM" />
+  </EntityType>
+  <EntityType Name="SP_DV">
+    <Key>
+      <PropertyRef Name="SP_ID" />
+    </Key>
+    <Property Name="SP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DIADIEM_ID" Type="Int32" Nullable="false" />
+    <Property Name="SP_TEN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SP_MOTA" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="SP_GIA" Type="Double" />
+    <NavigationProperty Name="DIADIEM" Relationship="Self.FK__SP_DV__DIADIEM_I__5CD6CB2B" FromRole="SP_DV" ToRole="DIADIEM" />
+    <NavigationProperty Name="HINHANHs" Relationship="Self.FK__HINHANH__SP_ID__5BE2A6F2" FromRole="SP_DV" ToRole="HINHANH" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__BAIDANG__DIADIEM__59FA5E80">
+    <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="1" />
+    <End Role="BAIDANG" Type="Self.BAIDANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DIADIEM">
+        <PropertyRef Name="DIADIEM_ID" />
+      </Principal>
+      <Dependent Role="BAIDANG">
+        <PropertyRef Name="DIADIEM_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BAIDANG__KHACHHA__5AEE82B9">
+    <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
+    <End Role="BAIDANG" Type="Self.BAIDANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACHHANG">
+        <PropertyRef Name="KHACHHANG_ID" />
+      </Principal>
+      <Dependent Role="BAIDANG">
+        <PropertyRef Name="KHACHHANG_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DIADIEM__KHACHHA__59063A47">
+    <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
+    <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACHHANG">
+        <PropertyRef Name="KHACHHANG_ID" />
+      </Principal>
+      <Dependent Role="DIADIEM">
+        <PropertyRef Name="KHACHHANG_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DIADIEM__LOAI_ID__5812160E">
+    <End Role="LOAI" Type="Self.LOAI" Multiplicity="0..1" />
+    <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOAI">
+        <PropertyRef Name="LOAI_ID" />
+      </Principal>
+      <Dependent Role="DIADIEM">
+        <PropertyRef Name="LOAI_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DIADIEM__NHANVIE__571DF1D5">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+    <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="NHANVIEN_ID" />
+      </Principal>
+      <Dependent Role="DIADIEM">
+        <PropertyRef Name="NHANVIEN_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SP_DV__DIADIEM_I__5CD6CB2B">
+    <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="1" />
+    <End Role="SP_DV" Type="Self.SP_DV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DIADIEM">
+        <PropertyRef Name="DIADIEM_ID" />
+      </Principal>
+      <Dependent Role="SP_DV">
+        <PropertyRef Name="DIADIEM_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HINHANH__SP_ID__5BE2A6F2">
+    <End Role="SP_DV" Type="Self.SP_DV" Multiplicity="0..1" />
+    <End Role="HINHANH" Type="Self.HINHANH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SP_DV">
+        <PropertyRef Name="SP_ID" />
+      </Principal>
+      <Dependent Role="HINHANH">
+        <PropertyRef Name="SP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QUANLYDIADIEMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BAIDANGs" EntityType="Self.BAIDANG" />
+    <EntitySet Name="DIADIEMs" EntityType="Self.DIADIEM" />
+    <EntitySet Name="HINHANHs" EntityType="Self.HINHANH" />
+    <EntitySet Name="KHACHHANGs" EntityType="Self.KHACHHANG" />
+    <EntitySet Name="LOAIs" EntityType="Self.LOAI" />
+    <EntitySet Name="NHANVIENs" EntityType="Self.NHANVIEN" />
+    <EntitySet Name="SP_DV" EntityType="Self.SP_DV" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK__BAIDANG__DIADIEM__59FA5E80" Association="Self.FK__BAIDANG__DIADIEM__59FA5E80">
+      <End Role="DIADIEM" EntitySet="DIADIEMs" />
+      <End Role="BAIDANG" EntitySet="BAIDANGs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BAIDANG__KHACHHA__5AEE82B9" Association="Self.FK__BAIDANG__KHACHHA__5AEE82B9">
+      <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
+      <End Role="BAIDANG" EntitySet="BAIDANGs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DIADIEM__KHACHHA__59063A47" Association="Self.FK__DIADIEM__KHACHHA__59063A47">
+      <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
+      <End Role="DIADIEM" EntitySet="DIADIEMs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DIADIEM__LOAI_ID__5812160E" Association="Self.FK__DIADIEM__LOAI_ID__5812160E">
+      <End Role="LOAI" EntitySet="LOAIs" />
+      <End Role="DIADIEM" EntitySet="DIADIEMs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DIADIEM__NHANVIE__571DF1D5" Association="Self.FK__DIADIEM__NHANVIE__571DF1D5">
+      <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+      <End Role="DIADIEM" EntitySet="DIADIEMs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SP_DV__DIADIEM_I__5CD6CB2B" Association="Self.FK__SP_DV__DIADIEM_I__5CD6CB2B">
+      <End Role="DIADIEM" EntitySet="DIADIEMs" />
+      <End Role="SP_DV" EntitySet="SP_DV" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HINHANH__SP_ID__5BE2A6F2" Association="Self.FK__HINHANH__SP_ID__5BE2A6F2">
+      <End Role="SP_DV" EntitySet="SP_DV" />
+      <End Role="HINHANH" EntitySet="HINHANHs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

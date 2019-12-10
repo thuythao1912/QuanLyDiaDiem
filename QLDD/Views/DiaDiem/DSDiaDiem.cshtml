@@ -1,0 +1,85 @@
+﻿@model IPagedList<QLDD.Models.DIADIEM>
+@using QLDD.Models
+@using PagedList
+@using PagedList.Mvc
+
+@{
+
+    Layout = "~/Views/Shared/Header_Footer.cshtml";
+    var db = new QUANLYDIADIEMEntities();
+    var listLoai = db.LOAIs;
+
+}
+
+<h3>DANH SÁCH ĐỊA ĐIỂM CỦA TÔI</h3>
+<button class="btn btn-info">
+    @Html.ActionLink("Thêm địa điểm", "CreateDD", new { id = TempData["ID"] })
+
+</button>
+<button class="btn btn-default">
+    @Html.ActionLink("Trở về", "Index","Home", new { id = TempData["IDKH"] }, null)
+</button>
+<hr />
+<table class="table table-bordered">
+    <tr>
+        <th>STT</th>
+        <th>
+            TÊN ĐỊA ĐIỂM
+        </th>
+        <th>
+            ĐỊA CHỈ
+        </th>
+       
+    
+        <th>CHI TIẾT</th>
+    </tr>
+    @{ int i = 0;}
+    @foreach (var item in Model)
+{
+    { i++; }
+<tr>
+    <td>@i</td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DIADIEM_TEN)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DIADIEM_DIACHI)
+    </td>
+   
+    
+       
+       
+    <td>
+        <button class="btn btn-warning" onclick="Xoa( @item.DIADIEM_ID, '@item.KHACHHANG_ID')">
+            Xóa
+        </button>
+        <button class="btn btn-danger">
+            @Html.ActionLink("Chi tiết","KH_DiaDiemCT", "KH_DiaDiem", new { id = item.DIADIEM_ID, idkh = item.KHACHHANG_ID }, null)
+        </button>
+    </td>
+</tr>
+}
+
+</table>
+<div class="pagination pagination-centered">
+    @Html.PagedListPager(Model, page => Url.Action("DSDiaDiem", new { page }))
+</div>
+<script>
+
+    function Xoa(dd, kh) {
+        var ans = confirm("Bạn có muốn xóa địa điểm này,tất cả bài đăng và hình ảnh của địa điểm cũng sẽ bị xóa ?");
+        if (ans) {
+            $.ajax({
+                method: 'get',
+                url: '/diadiem/DeleteDD',
+                data: { id: dd, idkh: kh },
+                success: function () {
+                    alert("Xóa thành công");
+                    window.location.href = '/diadiem/dsdiadiem/' + kh;
+                }
+
+            })
+        }
+    }
+</script>
+

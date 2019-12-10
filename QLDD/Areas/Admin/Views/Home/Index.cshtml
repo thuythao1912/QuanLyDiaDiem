@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prakhar Srivastava</title>
+    <link href="/Areas/Admin/Assets/index/bootstrap.css" rel="stylesheet" />
+    <link href="/Areas/Admin/Assets/index/stylesheet.css" rel="stylesheet" />
+    <link href="/Areas/Admin/Assets/index/style.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://itexpress.vn/js/noel.js"></script>
+    @*<link rel="stylesheet" href="bootstrap.css">
+        <link rel="stylesheet" href="stylesheet.css">*@
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <svg viewBox="0 0 1000 600">
+                    <symbol id="s-text">
+                        <text text-anchor="middle"
+                              x="50%"
+                              y="35%"
+                              class="text--line">
+                            DUCKDY
+                        </text>
+                        <text text-anchor="middle"
+                              x="50%"
+                              y="68%"
+                              class="text--line2">
+                            WELCOME
+                        </text>
+
+                    </symbol>
+
+                    <g class="g-ants">
+                        <use xlink:href="#s-text"
+                             class="text-copy"></use>
+                        <use xlink:href="#s-text"
+                             class="text-copy"></use>
+                        <use xlink:href="#s-text"
+                             class="text-copy"></use>
+                        <use xlink:href="#s-text"
+                             class="text-copy"></use>
+                        <use xlink:href="#s-text"
+                             class="text-copy"></use>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+    @*<div style="float:right;width:300px;height:150px;background-color:red">
+        <div id="clock"> 8:10:45
+           
+        </div>
+    </div>*@
+</body>
+</html>
+<script>
+    function showTime() {
+        var time = new Date();
+        var hr = new time.getHours;
+        var min = new time.getMinutes;
+        var sec = new time.getSeconds;
+        var currentTime = hr + ":" + min + ":" + sec;
+        //document.getElementById("clock").innerHTML = currentTime;
+        Document.getElementById("clock").innerHTML = currentTime;
+
+    }
+    showTime();
+</script>

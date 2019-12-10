@@ -1,0 +1,81 @@
+﻿@model QLDD.Models.HINHDIADIEM
+
+@{
+
+    Layout = "~/Views/Shared/ck_finder.cshtml";
+}
+@section jsFooter{
+    <script>
+        $(document).ready(function () {
+            $('#btnSelectImage').on("click", function (e) {
+                e.preventDefault();
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (url) {
+                    $('#txtImage').val(url);
+                };
+                finder.popup();
+            })
+        })
+    </script>
+}
+
+
+
+@using (Html.BeginForm(@*"ThemHinhDiaDiem", "DiaDiem", FormMethod.Post, new { @enctype = "multipart/form-data" }*@))
+{
+@Html.AntiForgeryToken()
+
+<div>
+
+    <h3 style="color: #c82933"><strong>THÊM HÌNH ẢNH ĐỊA ĐIỂM</strong></h3>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <table border="0">
+        <tr>
+            <th> ID ĐỊA ĐIỂM: </th>
+            <td>
+                @Html.EditorFor(model => model.DIADIEM_ID, new { htmlAttributes = new { @class = "form-control", @Value = TempData["ID"], @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.DIADIEM_ID, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <th> CHỌN HÌNH ẢNH: </th>
+            <td>
+                @Html.TextBoxFor(model => model.HDD_LINK, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" }, id = "txtImage", @required="required" })
+                <button id="btnSelectImage" class="btn btn-default">Chọn ảnh </button>
+            </td>
+        </tr>
+        <tr>
+            <td width="400"></td>
+        </tr>
+        <tr>
+            <td height="80px"></td>
+            <td>
+
+                <input type="submit" value="Lưu" class="btn btn-warning" />
+                <button class="btn btn-warning">
+                    @Html.ActionLink("Trở về", "KH_DiaDiemCT", "KH_DiaDiem", new { id = TempData["ID"], index = 1 }, null)
+                </button>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+
+}
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    //luu hinh dia diem
+    function luuHinhDiaDiem(dd, kh) {
+        $.ajax({
+            method: 'post',
+            url: '/diadiem/ThemHinhDiaDiem',
+            data: { id: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+</script>

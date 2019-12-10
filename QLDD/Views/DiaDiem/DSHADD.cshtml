@@ -1,0 +1,53 @@
+﻿@model IEnumerable<QLDD.Models.HINHDIADIEM>
+
+@{
+    Layout = "~/Views/Shared/ck_finder.cshtml";
+}
+
+
+<div style="display: flex; align-items:center; justify-content:space-between; border-bottom: solid 1px #eee; padding: 0px 15px">
+    <h3 style="color: #c82933"><strong>DANH SÁCH HÌNH ẢNH</strong></h3>
+    <div>
+        <button class="btn btn-info" onclick="themHinhDiaDiem(@TempData["ID"], '@TempData["IDKH"]')">
+            Thêm hình ảnh
+        </button>
+        <button class="btn btn-default">
+            @Html.ActionLink("Trở về", "DSDiaDiem", "DiaDiem", new { id = TempData["IDKH"] }, null)
+        </button>
+    </div>
+</div>
+
+@{ var count = 1;}
+<div class="row-fluid" style="padding: 10px">
+    @foreach (var item in Model)
+    {
+        <div class="span3">
+            <div class="thumbnail-diadiem-card" style="background-image: url('@Html.DisplayFor(modelItem => item.HDD_LINK)')"></div>
+            <button class="btn btn-danger" style="margin:10px 0px; float:right">
+                @Html.ActionLink("Xóa", "DeleteHA", new { id = item.HDD_ID, idkh = TempData["IDKH"], iddd = item.DIADIEM_ID })
+            </button>
+        </div>
+        if (count % 4 == 0)
+        {
+        @:</div>
+        @:<div>
+        }
+        count++;
+    }
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    
+    //them hinh dia diem
+    function themHinhDiaDiem(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/diadiem/ThemHinhDiaDiem',
+            data: { id: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+</script>

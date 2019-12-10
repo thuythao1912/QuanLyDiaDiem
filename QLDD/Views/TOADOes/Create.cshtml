@@ -1,0 +1,103 @@
+﻿@model QLDD.Models.TOADO
+
+
+@{
+    Layout = null;
+}
+<div style="display: flex; align-items:center; justify-content:space-between; border-bottom: solid 1px #eee; padding: 0px 15px">
+    <h3 style="color: #c82933"><strong>CẬP NHẬT VỊ TRÍ</strong></h3>
+    <button class="btn btn-default" onclick="getBanDo(@TempData["ID"], '@TempData["IDKH"]' )">
+        Trở về
+    </button>
+</div>
+<div style="display:flex; align-items:center">
+    <div id="googleMap" style="width:100%;height:400px;" class="span8"></div>
+    
+    <div class="span4">
+        <button onclick="Xem()" class="btn btn-info">Xem tọa độ</button>
+        
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label><strong>Tọa độ Lattitude</strong></label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TOADO_LAT, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.TOADO_LAT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><strong>Tọa độ Longitude</strong></label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TOADO_LNG, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.TOADO_LNG, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><strong>Địa điểm ID</strong></label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DIADIEM_ID, new { htmlAttributes = new { @class = "form-control", @Value = TempData["ID"], @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.DIADIEM_ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 10px">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Lưu" class="btn btn-warning" id="btnLuu" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    
+</div>
+
+<script>
+    var lat;
+    var lng;
+    var marker;
+
+    function myMap() {
+        //load map
+        var mapProp = {
+            center: new google.maps.LatLng(10.030208, 105.768426),
+            zoom: 16,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+        //place marker
+        marker = new google.maps.Marker({
+            position: { lat: 10.030208, lng: 105.768426 },
+            map: map,
+            title: 'Vị trí của bạn!',
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+        });
+
+    }
+
+    function Xem() {
+        document.getElementById("TOADO_LAT").value = marker.position.lat().toFixed(6);
+        document.getElementById("TOADO_LNG").value = marker.position.lng().toFixed(6);
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr5qwgemJp4LtodR8lvXg382V-cDFK3bY&callback=myMap">
+</script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    //get Ban Do
+    function getBanDo(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/TOADOES/XemBanDo',
+            data: { dd: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+</script>

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<QLDD.Models.HINHSANPHAM>
+@{
+    ViewBag.Title = "DSHSP";
+    Layout = null;
+}
+<div style="display: flex; align-items:center; justify-content:space-between; border-bottom: solid 1px #eee; padding: 0px 15px">
+    <h3 style="color: #c82933"><strong>DANH SÁCH HÌNH SẢN PHẨM</strong></h3>
+    <div>
+        <button class="btn btn-info" onclick="themHinhSP(@TempData["ID"], @TempData["IDDD"], '@TempData["IDKH"]')">
+            Thêm hình ảnh
+        </button>
+        <button class="btn btn-default" onclick="getSanPham(@TempData["IDDD"], '@TempData["IDKH"]' )">
+            Trở về
+        </button>
+    </div>
+</div>
+
+
+@{ var count = 1;}
+<div class="row-fluid" style="padding: 10px">
+    @foreach (var item in Model)
+    {
+        <div class="span3">
+            <div class="thumbnail-diadiem-card" style="background-image: url('@Html.DisplayFor(modelItem => item.HSP_LINK)')"></div>
+            <button class="btn btn-danger" style="margin:10px 0px; float:right">
+                @Html.ActionLink("Xóa", "DeleteHSP", new { id = item.HSP_ID, idkh = TempData["IDKH"], iddd = TempData["IDDD"] })
+            </button>
+        </div>
+        if (count % 4 == 0)
+        {
+            @:</div>
+            @:<div>
+        }
+        count++;
+    }
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    //get san pham
+    function getSanPham(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/sanpham/dssanpham',
+            data: { id: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+    //them hinh dia diem
+    function themHinhSP(sp, dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/sanpham/ThemHinhsp',
+            data: { id: sp, iddd: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+
+    function Xoa(ha, dd, kh) {
+        var ans = confirm("Bạn có muốn xóa hình này ?");
+        if (ans) {
+            $.ajax({
+                method: 'get',
+                url: '/Diadiem/DeleteHSP',
+                data: { id: ha, iddd: dd, idkh: kh },
+                success: function () {
+                    alert("Xóa thành công");
+
+                }
+
+            })
+        }
+    }
+
+
+</script>

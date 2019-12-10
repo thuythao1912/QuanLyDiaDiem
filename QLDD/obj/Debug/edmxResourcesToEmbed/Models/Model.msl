@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QUANLYDIADIEMModelStoreContainer" CdmEntityContainer="QUANLYDIADIEMEntities">
+    <EntitySetMapping Name="BAIDANGs">
+      <EntityTypeMapping TypeName="QUANLYDIADIEMModel.BAIDANG">
+        <MappingFragment StoreEntitySet="BAIDANG">
+          <ScalarProperty Name="BAIDANG_ID" ColumnName="BAIDANG_ID" />
+          <ScalarProperty Name="DIADIEM_ID" ColumnName="DIADIEM_ID" />
+          <ScalarProperty Name="KHACHHANG_ID" ColumnName="KHACHHANG_ID" />
+          <ScalarProperty Name="BAIDANG_NGAY" ColumnName="BAIDANG_NGAY" />
+          <ScalarProperty Name="BAIDANG_DUYET" ColumnName="BAIDANG_DUYET" />
+          <ScalarProperty Name="BAIDANG_NOIDUNG" ColumnName="BAIDANG_NOIDUNG" />
+          <ScalarProperty Name="BAIDANG_HINHANH" ColumnName="BAIDANG_HINHANH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DIADIEMs">
+      <EntityTypeMapping TypeName="QUANLYDIADIEMModel.DIADIEM">
+        <MappingFragment StoreEntitySet="DIADIEM">
+          <ScalarProperty Name="DIADIEM_ID" ColumnName="DIADIEM_ID" />
+          <ScalarProperty Name="LOAI_ID" ColumnName="LOAI_ID" />
+          <ScalarProperty Name="NHANVIEN_ID" ColumnName="NHANVIEN_ID" />
+          <ScalarProperty Name="DIADIEM_TEN" ColumnName="DIADIEM_TEN" />
+          <ScalarProperty Name="DIADIEM_DIACHI" ColumnName="DIADIEM_DIACHI" />
+          <ScalarProperty Name="DIADIEM_LINK" ColumnName="DIADIEM_LINK" />
+          <ScalarProperty Name="DIADIEM_MOTA" ColumnName="DIADIEM_MOTA" />
+          <ScalarProperty Name="DIADIEM_TRANGTHAI" ColumnName="DIADIEM_TRANGTHAI" />
+          <ScalarProperty Name="KHACHHANG_ID" ColumnName="KHACHHANG_ID" />
+          <ScalarProperty Name="ANHDAIDIEN" ColumnName="ANHDAIDIEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HINHANHs">
+      <EntityTypeMapping TypeName="QUANLYDIADIEMModel.HINHANH">
+        <MappingFragment StoreEntitySet="HINHANH">
+          <ScalarProperty Name="HINHANH_ID" ColumnName="HINHANH_ID" />
+          <ScalarProperty Name="SP_ID" ColumnName="SP_ID" />
+          <ScalarProperty Name="HINHANH_LINK" ColumnName="HINHANH_LINK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KHACHHANGs">
+      <EntityTypeMapping TypeName="QUANLYDIADIEMModel.KHACHHANG">
+        <MappingFragment StoreEntitySet="KHACHHANG">
+          <ScalarProperty Name="KHACHHANG_ID" ColumnName="KHACHHANG_ID" />
+          <ScalarProperty Name="KHACHHANG_TEN" ColumnName="KHACHHANG_TEN" />
+          <ScalarProperty Name="KHACHHANG_SDT" ColumnName="KHACHHANG_SDT" />
+          <ScalarProperty Name="KHACHHANG_EMAIL" ColumnName="KHACHHANG_EMAIL" />
+          <ScalarProperty Name="KHACHHANG_PASSWORD" ColumnName="KHACHHANG_PASSWORD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOAIs">
+      <EntityTypeMapping TypeName="QUANLYDIADIEMModel.LOAI">
+        <MappingFragment StoreEntitySet="LOAI">
+          <ScalarProperty Name="LOAI_ID" ColumnName="LOAI_ID" />
+          <ScalarProperty Name="LOAI_TEN" ColumnName="LOAI_TEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NHANVIENs">
+      <EntityTypeMapping TypeName="QUANLYDIADIEMModel.NHANVIEN">
+        <MappingFragment StoreEntitySet="NHANVIEN">
+          <ScalarProperty Name="NHANVIEN_ID" ColumnName="NHANVIEN_ID" />
+          <ScalarProperty Name="NHANVIEN_TEN" ColumnName="NHANVIEN_TEN" />
+          <ScalarProperty Name="NHANVIEN_NGAYSINH" ColumnName="NHANVIEN_NGAYSINH" />
+          <ScalarProperty Name="NHANVIEN_DIACHI" ColumnName="NHANVIEN_DIACHI" />
+          <ScalarProperty Name="NHANVIEN_PHAI" ColumnName="NHANVIEN_PHAI" />
+          <ScalarProperty Name="NHANVIEN_EMAIL" ColumnName="NHANVIEN_EMAIL" />
+          <ScalarProperty Name="NHANVIEN_SDT" ColumnName="NHANVIEN_SDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SP_DV">
+      <EntityTypeMapping TypeName="QUANLYDIADIEMModel.SP_DV">
+        <MappingFragment StoreEntitySet="SP_DV">
+          <ScalarProperty Name="SP_ID" ColumnName="SP_ID" />
+          <ScalarProperty Name="DIADIEM_ID" ColumnName="DIADIEM_ID" />
+          <ScalarProperty Name="SP_TEN" ColumnName="SP_TEN" />
+          <ScalarProperty Name="SP_MOTA" ColumnName="SP_MOTA" />
+          <ScalarProperty Name="SP_GIA" ColumnName="SP_GIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="QUANLYDIADIEMModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,259 @@
+﻿@model QLDD.Models.DIADIEM
+@{
+    ViewBag.Title = "ChiTietDiaDiem";
+    Layout = "~/Views/Shared/Header_Footer.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<style>
+    .mySlides {
+        display: none;
+        width: 600px;
+        height: 300px;
+        background-color: #0c5460;
+        background-image: none;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .thumbnail-sp {
+        width: 120px;
+        height: 80px;
+        background-color: #0c5460;
+        background-image: none;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .mySP {
+        display: none;
+        width: 450px;
+        height: 250px;
+        background-color: #0c5460;
+        background-image: none;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+</style>
+
+<table style="margin:auto;">
+    <tr>
+        <td>
+            @if (Model.HINHDIADIEMs.Count() > 0)
+            {
+                foreach (var hdd in Model.HINHDIADIEMs)
+                {
+                    <div class="mySlides" style="background-image: url(@hdd.HDD_LINK)"></div>
+                }
+                <div style="margin-top: 10px">
+                    <button class="btn btn-warning" onclick="plusDivs(-1)">Prev</button>
+                    <button class="btn btn-warning" onclick="plusDivs(1)">Next</button>
+                </div>
+            }
+            else
+            {
+                {
+                    <div class='mySlides' style="background-image: url('/Assets/images/404_mask.png')"> </div>
+                }
+            }
+
+
+
+
+        </td>
+        <td style="vertical-align:top" width="50%">
+            <h1 style="color: #fab001"><strong>@Html.DisplayFor(model => model.DIADIEM_TEN)</strong></h1>
+            <p>@Html.DisplayFor(model => model.LOAI.LOAI_TEN)</p>
+            <p>
+                <img src="/Assets/images/pointer.png" />
+                @Html.DisplayFor(model => model.DIADIEM_DIACHI)
+            </p>
+            <p>
+                <img src="/Assets/images/globe.png" />
+                @Html.DisplayFor(model => model.DIADIEM_WEB)
+            </p>
+            <p>@Html.DisplayFor(model => model.DIADIEM_MOTA)</p>
+
+
+        </td>
+    </tr>
+</table>
+
+<script>
+    var slideIndex = 1;
+    var spIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+    function plusSP(n) {
+        showSP(spIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex - 1].style.display = "block";
+    }
+    function showSP(n) {
+        var i;
+        var x = document.getElementsByClassName("mySP");
+        if (n > x.length) { spIndex = 1 }
+        if (n < 1) { spIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[spIndex - 1].style.display = "block";
+    }
+
+    async function showHSP(idSP) {
+        spIndex = 1;
+        await $.ajax({
+            method: 'get',
+            url: '/hinhsanpham/hinhsanpham/' + idSP,
+            success: function (res) {
+                $("#chitiet").html(res);
+                showSP(1);
+                console.log(res);
+            }
+        })
+    }
+</script>
+<hr />
+<div id="map" class="span12" style="margin:10px"></div>
+<hr />
+<div class="row-fluid">
+    <div class="span6">
+        <h3 style="color: #fab001" class="text-center"><strong>Sản phẩm - Dịch vụ</strong></h3>
+        <div style="display:flex; margin: 10px">
+            <input class="form-control span8" id="txtSanPham" type="text" placeholder="Nhập vào để tìm kiếm.." style="margin:auto">
+        </div>
+        @{ if (Model.SANPHAMs.Count() > 0)
+            {
+
+                <table style="margin-left: 20px;" width="100%" class="table table-hover" id="tbSanPham">
+                    @foreach (var item in Model.SANPHAMs)
+                    {
+                        <tr>
+                            <td width="30%">
+                                <strong>@item.SANPHAM_TEN</strong>
+                            </td>
+                            <td width="15%">
+                                @item.SANPHAM_GIA
+                            </td>
+                            <td width="10%">
+                                @{var hsp = (from h in item.HINHSANPHAMs orderby h.HSP_ID descending select h).Take(1).ToList();
+                                    if (hsp.Count > 0)
+                                    {
+                                        <div class="thumbnail-sp" style="background-image: url(@hsp[0].HSP_LINK)"></div>
+                                    }
+
+                                }
+                            </td>
+                            <td width="15%">
+                                <button class="btn btn-default" onclick="showHSP(@item.SANPHAM_ID)">Chi tiết</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+            }
+            else
+            {
+                <h4 style="color: #E21B1B" class="text-center">Chưa có hình sản phẩm</h4>
+            }
+        }
+    </div>
+    <div id="chitiet" class="span6" style="margin-top: 100px">
+
+    </div>
+</div>
+<hr />
+
+<div>
+    <h3 style="color: #fab001" class="text-center"><strong>Bài đăng</strong></h3>
+    <div style="display:flex; margin: 10px">
+        <input class="form-control span5" id="txtBaiDang" type="text" placeholder="Nhập vào để tìm kiếm.." style="margin:auto">
+    </div>
+    @{ if (Model.BAIDANGs.Count() > 0)
+        {
+        <table width="100%" class="table table-striped" id="tbBaiDang">
+            @{var index = 1; var chuaduyet = 0; }
+            @foreach (var item in Model.BAIDANGs.OrderByDescending(i => i.BAIDANG_ID))
+            {
+                if (item.BAIDANG_DUYET == 1)
+                {
+                    <tr>
+                        <td width="10%">@index</td>
+                        <td width="20%">@item.BAIDANG_NGAY</td>
+                        <td width="70%">
+                            @item.BAIDANG_NOIDUNG
+                        </td>
+                    </tr>
+                    index++;
+                }
+                else
+                {
+                    chuaduyet++;
+                }
+            }
+            @{ if (chuaduyet == Model.BAIDANGs.Count())
+                {
+                    <tr>
+                        <td>
+                            <h4 style="color: #E21B1B" class="text-center">Chưa có bài đăng được duyệt</h4>
+                        </td>
+                    </tr>
+                }
+            }
+            <tr>
+                <td colspan="4">
+                </td>
+            </tr>
+        </table>
+
+        }
+        else
+        {
+            <h4 style="color: #E21B1B" class="text-center">Chưa có bài đăng</h4>
+        }
+    }
+
+    
+    <script>
+        $(document).ready(function () {
+            //table bai dang
+            $("#txtBaiDang").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#tbBaiDang tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+            //table san pham
+            $("#txtSanPham").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#tbSanPham tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            //get ban do
+            $.ajax({
+            method: 'get',
+            url: '/TOADOES/KH_BanDo',
+            data: { dd: @Html.DisplayFor(model => model.DIADIEM_ID) },
+            success: function (res) {
+                $("#map").html(res);
+            }
+        })
+        });
+    </script>
+</div>

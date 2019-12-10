@@ -1,0 +1,64 @@
+﻿@model IEnumerable<QLDD.Models.DIADIEM>
+@{
+    Layout = null;
+}
+
+<table class="table">
+    <tr>
+        <th style="background-color:#394A59;color:#fff">
+            TÊN ĐỊA ĐIỂM
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+           ĐỊA CHỈ
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            WEBSITE
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            MÔ TẢ
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            KHÁCH HÀNG
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            LOẠI HÌNH
+        </th>
+        <th style="background-color:#394A59;color:#fff">THAO TÁC</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DIADIEM_TEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DIADIEM_DIACHI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DIADIEM_WEB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DIADIEM_MOTA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KHACHHANG.KHACHHANG_TEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LOAI.LOAI_TEN)
+            </td>
+            <td>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59;">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.DIADIEM_ID })
+                </button>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Details", "Details", new { id = item.DIADIEM_ID })
+                </button>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Delete", "Delete", new { id = item.DIADIEM_ID })
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<QLDD.Models.HINHSANPHAM>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@{ var sp_name = ""; var sp_gia = ""; var sp_mota = "";}
+@{ if (Model.Count() > 0)
+    {
+        <table width="100%">
+            <tr>
+                <td>
+                    @foreach (var item in Model)
+                    {
+                        <div class="mySP" style='background-image: url("@Html.DisplayFor(modelItem => item.HSP_LINK)")'></div>
+                        {
+                            sp_gia = Html.DisplayFor(modelItem => item.SANPHAM.SANPHAM_GIA).ToString();
+                            sp_name = Html.DisplayFor(modelItem => item.SANPHAM.SANPHAM_TEN).ToString();
+                            sp_mota = Html.DisplayFor(modelItem => item.SANPHAM.SANPHAM_MOTA).ToString();
+
+                        }
+                    }
+                </td>
+                <td style="background-color:#181A1C" align="center" width="40%">
+                    @{<h3 style="color: #FECE1A">@sp_name</h3>
+                    <h4 style="color: #fff">@sp_gia</h4>
+                    <h5 style="color: #FECE1A">@sp_mota</h5>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="margin-top: 10px">
+                        <button class="btn btn-warning" onclick="plusSP(-1)">Prev</button>
+                        <button class="btn btn-warning" onclick="plusSP(1)">Next</button>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+
+
+    }
+    else
+    {
+        <h4 style="color: #E21B1B">Chưa có hình sản phẩm</h4>
+    }
+}

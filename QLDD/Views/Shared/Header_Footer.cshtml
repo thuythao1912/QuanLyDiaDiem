@@ -1,0 +1,160 @@
+﻿
+
+@{
+
+    Layout = null;
+}
+<!DOCTYPE html>
+<!--
+ * A Design by GraphBerry
+ * Author: GraphBerry
+ * Author URL: http://graphberry.com
+ * License: http://graphberry.com/pages/license
+-->
+<html lang="en">
+
+<head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duckdy</title>
+    <!-- Load Roboto font -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <!-- Load css styles -->
+    <link rel="stylesheet" type="text/css" href="/Assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/Assets/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/Assets/css/newstyle.css" />
+    <link rel="stylesheet" type="text/css" href="/Assets/css/pluton.css" />
+    <!--[if IE 7]>
+        <link rel="stylesheet" type="text/css" href="css/pluton-ie7.css" />
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/Assets/css/jquery.cslider.css" />
+    <link rel="stylesheet" type="text/css" href="/Assets/css/jquery.bxslider.css" />
+    <link rel="stylesheet" type="text/css" href="/Assets/css/animate.css" />
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/Assets/images/ico/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/Assets/images/ico/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/Assets/images/apple-touch-icon-72.png">
+    <link rel="apple-touch-icon-precomposed" href="/Assets/images/ico/apple-touch-icon-57.png">
+    <link rel="shortcut icon" href="/Assets/images/ico/favicon.ico">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a href="#" class="brand">
+                <img src="/Assets/images/logo.png" width="120" alt="Logo" />
+                <!-- This is website logo -->
+            </a>
+            <!-- Navigation button, visible on small resolution -->
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-menu"></i>
+            </button>
+            @{Html.RenderAction("TopMenu", "Home");}
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!-- Start home section -->
+    <!-- End home section -->
+    <!-- Service section start -->
+    <!-- Service section end -->
+    <!-- Portfolio section start -->
+    <div style="padding:10px">
+        @RenderBody()
+    </div>
+    <!-- Portfolio section end -->
+    <!-- About us section start -->
+    <!-- About us section end -->
+    <!-- Client section start -->
+    <!-- Client section start -->
+    <!-- Contact section start -->
+    <div id="contact" class="contact">
+        <div class="section secondary-section">
+            <div class="container">
+                <div class="title">
+                    <h1>Liên hệ</h1>
+
+                </div>
+            </div>
+
+
+            <div class="container">
+                <div class="span9 center contact-info">
+                    <p>Trường Đại học Cần Thơ, Khu 2, đường 3/2, Quận Ninh Kiều, Thành phố Cần Thơ</p>
+                    <p class="info-mail">duckdy@gmail.com</p>
+                    <p>+11 234 567 890</p>
+                    <p>+11 286 543 850</p>
+                    <div class="title">
+                        <h3>Theo dõi Duckdy</h3>
+                    </div>
+                </div>
+                <div class="row-fluid centered">
+                    <ul class="social">
+                        <li>
+                            <a href="">
+                                <span class="icon-facebook-circled"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <span class="icon-twitter-circled"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <span class="icon-linkedin-circled"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <span class="icon-pinterest-circled"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <span class="icon-dribbble-circled"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <span class="icon-gplus-circled"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact section edn -->
+    <!-- Footer section start -->
+    <div class="footer">
+        <p>&copy; 2013 Theme by <a href="http://www.graphberry.com">GraphBerry</a>, <a href="http://goo.gl/NM84K2">Documentation</a></p>
+    </div>
+    <!-- Footer section end -->
+    <!-- ScrollUp button start -->
+    <div class="scrollup">
+        <a href="#">
+            <i class="icon-up-open"></i>
+        </a>
+    </div>
+    <!-- ScrollUp button end -->
+    <!-- Include javascript -->
+    <script src="/Assets/js/jquery.js"></script>
+    <script type="text/javascript" src="/Assets/js/jquery.mixitup.js"></script>
+    <script type="text/javascript" src="/Assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/Assets/js/modernizr.custom.js"></script>
+    <script type="text/javascript" src="/Assets/js/jquery.bxslider.js"></script>
+    <script type="text/javascript" src="/Assets/js/jquery.cslider.js"></script>
+    <script type="text/javascript" src="/Assets/js/jquery.placeholder.js"></script>
+    <script type="text/javascript" src="/Assets/js/jquery.inview.js"></script>
+    <!-- Load google maps api and call initializeMap function defined in app.js -->
+    <script async="" defer="" type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=initializeMap"></script>
+    <!-- css3-mediaqueries.js for IE8 or older -->
+    <!--[if lt IE 9]>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+    </script>
+    <script src="~/Assets/js/plugins/ckfinder/ckfinder.js"></script>
+    <script type="text/javascript" src="/Assets/js/app.js"></script>
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>

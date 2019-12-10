@@ -1,0 +1,49 @@
+﻿@model IEnumerable<QLDD.Models.KHACHHANG>
+@{
+    Layout = null;
+}
+
+
+<table class="table table-striped table-advance table-hover" id="result">
+    <tr>
+        <th style="background-color:#394A59;color:#fff">
+            HỌ TÊN KHÁCH HÀNG
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            SỐ ĐIỆN THOẠI
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+           EMAIL
+        </th>
+        
+        <th style="background-color:#394A59;color:#fff">THAO TÁC</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KHACHHANG_TEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KHACHHANG_SDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KHACHHANG_EMAIL)
+            </td>
+           
+            <td>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59;">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.KHACHHANG_ID })
+                </button>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Details", "Details", new { id = item.KHACHHANG_ID })
+                </button>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Delete", "Delete", new { id = item.KHACHHANG_ID })
+                </button>
+            </td>
+        </tr>
+    }
+    </table>
+

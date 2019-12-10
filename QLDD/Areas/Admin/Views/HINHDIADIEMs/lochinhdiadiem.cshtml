@@ -1,0 +1,34 @@
+﻿@model IEnumerable<QLDD.Models.HINHDIADIEM>
+@{
+    Layout = null;
+}
+
+<table class="table table-striped table-advance table-hover">
+    <tr>
+        <th style="background-color:#394A59;color:#fff">
+           HÌNH ẢNH
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+           TÊN ĐỊA ĐIỂM
+        </th>
+        <th style="background-color:#394A59;color:#fff">THAO TÁC</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.HDD_LINK)" width="120px" height="100px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DIADIEM.DIADIEM_TEN)
+            </td>
+            <td>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+    @Html.ActionLink("Delete", "Delete", new { id = item.HDD_ID })
+</button>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,133 @@
+﻿@model IEnumerable<QLDD.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "DSSanPham";
+    Layout = null;
+}
+
+    <div style="display: flex; align-items:center; justify-content:space-between; padding: 0px 15px">
+        <h3 style="color: #c82933"><strong>DANH SÁCH SẢN PHẨM</strong></h3>
+        <div>
+            <img src="~/Assets/images/add.png" width="25" height="25" />
+            <button class="btn btn-info" onclick="themSanPham(@TempData["ID"], '@TempData["IDKH"]')">
+                Thêm sản phẩm
+            </button>
+            <button class="btn btn-default">
+                @Html.ActionLink("Trở về", "DSDiaDiem", "DiaDiem", new { id = TempData["IDKH"] }, null)
+            </button>
+            <input class="form-control" id="txtSearch" type="text" placeholder="Nhập vào để tìm kiếm.." style="margin:auto">
+        </div>
+    </div>
+
+    <table class="table table-hover" id="tbSanPham">
+        <tr>
+            <th class="20%">
+                TÊN SẢN PHẨM
+            </th>
+            <th class="10%">
+                GIÁ
+            </th>
+            <th class="50%">
+                MÔ TẢ
+            </th>
+            <th class="20%">THAO TÁC</th>
+        </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SANPHAM_TEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SANPHAM_GIA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SANPHAM_MOTA)
+        </td>
+        <td>
+            <button class="btn btn-warning" onclick="suaSanPham(@item.SANPHAM_ID, @item.DIADIEM_ID, '@TempData["IDKH"]')">
+               Sửa
+            </button>
+            <button class="btn btn-danger" onclick="xoaSanPham(@item.SANPHAM_ID, @item.DIADIEM_ID, '@TempData["IDKH"]')">
+                Xóa
+            </button>
+            <button class="btn btn-default" onclick="xemHinhSP(@item.SANPHAM_ID, @item.DIADIEM_ID,'@TempData["IDKH"]')">
+                Hình ảnh
+                @*@Html.ActionLink("Hình ảnh", "DSHSP", new { id = item.SANPHAM_ID, idkh = TempData["IDKH"] })*@
+            </button>
+        </td>
+    </tr>
+}
+
+</table>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    //them san pham
+    function themSanPham(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/sanpham/CreateSP',
+            data: { id: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+    //sua sp
+     function suaSanPham(sp,dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/sanpham/Editsp',
+            data: { id: sp, iddd: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+    //xoa san pham
+    function xoaSanPham(sp, dd, kh) {
+        var ans = confirm("Bạn có muốn xóa sản phẩm này ?");
+        if (ans) {
+            $.ajax({
+                method: 'get',
+                url: '/sanpham/DeleteSP',
+                data: { id: sp, iddd: dd, idkh: kh },
+                success: function () {
+                    alert("Xóa thành công!");
+                    //get bai dang
+                    $.ajax({
+                        method: 'get',
+                        url: '/sanpham/dssanpham',
+                        data: { id: dd, idkh: kh },
+                        success: function (res) {
+                            $("#result").html(res);
+                        }
+                    })
+                }
+
+            })
+        }
+    }
+    //on load
+    $(document).ready(function () {
+        //table bai dang
+        $("#txtSearch").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#tbSanPham tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    //xem hinh anh
+    function xemHinhSP(sp, dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/sanpham/DSHSP',
+            data: { id: sp, iddd: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+</script>

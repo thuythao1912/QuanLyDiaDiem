@@ -1,0 +1,35 @@
+﻿@model QLDD.Models.HINHSANPHAM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HINHSANPHAM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HSP_LINK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HSP_LINK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SANPHAM.SANPHAM_TEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SANPHAM.SANPHAM_TEN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.HSP_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

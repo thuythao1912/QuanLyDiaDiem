@@ -1,0 +1,35 @@
+﻿@model IEnumerable<QLDD.Models.HINHSANPHAM>
+@{
+    Layout = null;
+}
+
+<table class="table table-striped table-advance table-hover">
+    <tr>
+        <th style="background-color:#394A59;color:#fff">
+            HÌNH ẢNH
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            TÊN SẢN PHẨM
+        </th>
+        <th style="background-color:#394A59;color:#fff">THAO TÁC</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.HSP_LINK)" width="120px" height="100px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SANPHAM.SANPHAM_TEN)
+            </td>
+            <td>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Delete", "Delete", new { id = item.HSP_ID })
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>
+

@@ -1,0 +1,10 @@
+@fontface{
+  font-family:Niagara Engraved ;
+  src: url(digital-7.ttf);
+}
+#clock{
+  font-size: 200px;
+  font-family: Niagara Engraved;
+  width: 250px;
+  text-align: center;
+}

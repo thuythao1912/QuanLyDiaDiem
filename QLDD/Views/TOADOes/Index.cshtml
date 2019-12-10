@@ -1,0 +1,46 @@
+﻿@model IEnumerable<QLDD.Models.TOADO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Header_Footer.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TOADO_LAT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TOADO_LNG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIADIEM.KHACHHANG_ID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TOADO_LAT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TOADO_LNG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIADIEM.KHACHHANG_ID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TOADO_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TOADO_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TOADO_ID })
+        </td>
+    </tr>
+}
+
+</table>

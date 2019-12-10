@@ -1,0 +1,41 @@
+﻿@model List<QLDD.Models.KHACHHANG>
+@using QLDD.Common
+@{
+    var session = (UserLogin)Session[QLDD.Common.CommonConstants.USER_SESSION];
+    Layout = null;
+}
+<div class="container">
+   
+    <!-- Main navigation -->
+    <div class="nav-collapse collapse pull-right">
+        <ul class="nav" id="top-navigation">
+            <li class="active"><a href="/Home/Index">Trang chủ</a></li>
+
+            <li><a href="/Home/Index#portfolio">Địa điểm</a></li>
+            <li><a href="/Home/Index#about">Giới thiệu</a></li>
+            <li><a href="/Home/Index#clients">Phản hồi</a></li>
+            <li><a href="/Home/Index#contact">Liên hệ</a></li>
+            @if (session == null)
+            {
+                <li><a href="/Login/Index">ĐĂNG NHẬP</a></li>
+                <li><a href="/Login/Register">ĐĂNG KÝ</a></li>
+                
+            }
+            else
+            {
+                <li><a href="/DiaDiem/DSDiaDiem/@session.UserName">QUẢN LÝ: @session.UserName</a></li>
+                @*<li><a class="nav">Xin chào: @session.UserName</a></li>*@
+               
+                @*<li>>@Html.ActionLink("Thoát", "Logout", "Login")Quản lý</a></li>*@
+                <li>@Html.ActionLink("Thoát", "Logout", "Login")</li>
+            }
+        </ul>
+    </div>
+
+    @*<div class="nav-collapse collapse pull-left">
+        <ul class="nav" id="cboxTopCenter">
+            <li><a href="/Login/Register">Đăng ký</a></li>
+        </ul>
+    </div>*@
+    <!-- End main navigation -->
+</div>

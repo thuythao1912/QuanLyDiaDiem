@@ -1,0 +1,159 @@
+﻿@model QLDD.Models.DIADIEM
+
+@{
+    ViewBag.Title = "KH_ChiTietDiaDiem";
+    Layout = "~/Views/Shared/Header_Footer.cshtml";
+}
+    <div class="row-fluid">
+        <div class="span2">
+            <table class="table table-hover">
+                <tr>
+                    <td onclick="getThongTin(@TempData["ID"], '@TempData["IDKH"]')">Thông tin</td>
+                </tr>
+                <tr>
+                    <td onclick="getBanDo(@TempData["ID"], '@TempData["IDKH"]')">Bản đồ</td>
+                </tr>
+                <tr>
+                    <td onclick="getHinhAnh(@TempData["ID"], '@TempData["IDKH"]')">Hình địa điểm</td>
+                </tr>
+                <tr>
+                    <td onclick="getBaiDang(@TempData["ID"], '@TempData["IDKH"]')">Bài đăng</td>
+                </tr>
+                <tr>
+                    <td onclick="getSanPham(@TempData["ID"], '@TempData["IDKH"]')">Sản phẩm</td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="span9">
+            <div id="result" class="span12"></div>
+        </div>
+    </div>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    //onload
+    $(document).ready(function () {
+        //alert(@TempData["Index"])
+        if (@TempData["Index"] == 1) {
+            getHinhAnh(@TempData["ID"], '@TempData["IDKH"]');
+        }
+        else if (@TempData["Index"] == 0) {
+            getThongTin(@TempData["ID"], '@TempData["IDKH"]');
+            
+        }
+        else if (@TempData["Index"] == 2) {
+            getBaiDang(@TempData["ID"], '@TempData["IDKH"]');
+        }
+        else if (@TempData["Index"] == 3) {
+            getHinhAnhLoi(@TempData["ID"], '@TempData["IDKH"]');
+        }
+        else if (@TempData["Index"] == 4) {
+            alert('here');
+            getSanPham(@TempData["ID"], '@TempData["IDKH"]');
+            //getHinhSanPham(@TempData["ID"], '@TempData["IDKH"]');
+        }
+        else if (@TempData["Index"] == 5) {
+            getHinhSanPhamLoi(@TempData["ID"], '@TempData["IDKH"]');
+        }
+        else if (@TempData["Index"] == 6) {
+            getSanPham(@TempData["ID"], '@TempData["IDKH"]');
+        }
+        else if (@TempData["Index"] == 7) {
+            getBanDo(@TempData["ID"], '@TempData["IDKH"]');
+        }
+    });
+    //get thong tin dia diem
+    function getThongTin(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/diadiem/DSDiaDiemCT',
+            data: { id: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+    //get hinh anh
+    function getHinhAnh(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/diadiem/DSHADD',
+            data: { id: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+    //get bai dang
+    function getBaiDang(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/baidang/dsbaidang',
+            data: { id: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+    //get hinh anh loi
+    function getHinhAnhLoi(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/diadiem/themhinhdiadiem',
+            data: { id: dd, idkh: kh },
+            success: function (res) {
+                alert("Hình ảnh đã tồn tại");
+                $("#result").html(res);
+            }
+        })
+    }
+    //get san pham
+    function getSanPham(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/sanpham/dssanpham',
+            data: { id: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+    //get hinh san pham loi
+    function getHinhSanPhamLoi(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/sanpham/ThemHinhSP',
+            data: { id: dd, idkh: kh },
+            success: function (res) {
+                alert("Hình ảnh đã tồn tại");
+                $("#result").html(res);
+            }
+        })
+    }
+
+    ////get san pham
+    //function getHinhSanPham(dd, kh) {
+    //    $.ajax({
+    //        method: 'get',
+    //        url: '/sanpham/dshsp',
+    //        data: { id: sp, iddd: dd, idkh: kh },
+    //        success: function (res) {
+    //            $("#result").html(res);
+    //        }
+    //    })
+    //}
+
+    //get Ban Do
+    function getBanDo(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/TOADOES/XemBanDo',
+            data: { dd: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+
+</script>

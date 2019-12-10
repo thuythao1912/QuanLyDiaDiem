@@ -1,0 +1,68 @@
+﻿@model QLDD.Models.BAIDANG
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h3>Bạn có muốn xóa bài đăng này?</h3>
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            NGÀY ĐĂNG
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BAIDANG_NGAY)
+
+        </dd>
+        <dt>
+            TRẠNG THÁI
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BAIDANG_DUYET)
+
+        </dd>
+
+        <dt>
+            NỘI DUNG
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BAIDANG_NOIDUNG)
+        </dd>
+
+        <dt>
+            KHÁCH HÀNG
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIADIEM.KHACHHANG_ID)
+        </dd>
+
+        <dt>
+            NHÂN VIÊN DUYỆT BÀI
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NHANVIEN.NHANVIEN_TEN)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input class="btn btn-primary" type="submit" value="Delete" style="width:60px;height:32px;background-color:#394A59;" /> |
+            <button class="btn btn-primary" style="width:100px;height:32px;background-color:#394A59;">@Html.ActionLink("Back to List", "Index")</button>
+        </div>
+    }
+</div>

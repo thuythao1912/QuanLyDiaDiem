@@ -1,0 +1,48 @@
+﻿@model IEnumerable<QLDD.Models.SANPHAM>
+@{
+    Layout = null;
+}
+
+<table class="table table-striped table-advance table-hover">
+    <tr>
+        <th style="background-color:#394A59;color:#fff">
+            TÊN SẢN PHẨM
+        </th>
+
+        <th style="background-color:#394A59;color:#fff">
+            GIÁ
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            TÊN ĐỊA ĐIỂM
+        </th>
+        <th style="background-color:#394A59;color:#fff">THAO TÁC</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SANPHAM_TEN)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SANPHAM_GIA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DIADIEM.DIADIEM_TEN)
+            </td>
+            <td>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59;">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.SANPHAM_ID })
+                </button>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Details", "Details", new { id = item.SANPHAM_ID })
+                </button>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SANPHAM_ID })
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,91 @@
+﻿@model QLDD.Models.DIADIEM
+
+@{
+    Layout = null;
+}
+
+
+    <div class="span8" style="border: solid 1px #eee;">
+        <div style="display: flex; align-items:center; justify-content:space-between; border-bottom: solid 1px #eee; padding: 0px 15px">
+            <h3 style="color: #c82933"><strong>CẬP NHẬT THÔNG TIN CỦA ĐỊA ĐIỂM</strong></h3>
+        </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.DIADIEM_ID)
+
+                    <table>
+                        <tr height="50">
+                            <th width="50%">
+                                LOẠI ĐỊA ĐIỂM
+                            </th>
+                            <td>
+                                @Html.DropDownListFor(model => model.LOAI_ID, (IEnumerable<SelectListItem>)ViewBag.Loai, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.LOAI_ID, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+
+                        <tr height="50">
+                            <th>
+                                TÊN ĐỊA ĐIỂM
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.DIADIEM_TEN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DIADIEM_TEN, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+
+                        <tr height="50">
+                            <th>
+                                ĐỊA CHỈ
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.DIADIEM_DIACHI, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DIADIEM_DIACHI, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr height="50">
+                            <th>
+                                WEBSITE
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.DIADIEM_WEB, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DIADIEM_WEB, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+
+                        <tr height="50">
+                            <th>
+                                MÔ TẢ
+                            </th>
+                            <td>
+
+                                @Html.TextAreaFor(model => model.DIADIEM_MOTA, 10, 150, new { htmlAttributes = new { @class = "form-control", @maxlength = "10000" } })
+                                @Html.ValidationMessageFor(model => model.DIADIEM_MOTA, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+
+                        <tr height="50">
+                            <td></td>
+                            <td>
+                                <input type="submit" value="Save" class="btn btn-warning" />
+                                <button class="btn btn-warning">
+                                    @Html.ActionLink("Trở về", "KH_DiaDiemCT", "KH_DiaDiem", new { id = TempData["ID"], idkh = TempData["IDKH"] }, null)
+                                </button>
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+
+                </div>
+            }
+
+
+    </div>

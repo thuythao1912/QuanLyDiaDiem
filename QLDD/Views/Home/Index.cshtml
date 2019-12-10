@@ -1,0 +1,55 @@
+﻿@using QLDD.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var db = new QUANLYDIADIEMEntities();
+    var listLoai = db.LOAIs;
+}
+
+
+<div class="section secondary-section " id="portfolio">
+    <div class="triangle"></div>
+    <div class="container">
+        <div class=" title">
+
+        </div>
+        <ul class="nav nav-pills">
+            <li class="filter" data-filter="all">
+                @Html.ActionLink("All", "Index", new { id = 0 })
+            </li>
+            @foreach (var item in listLoai)
+            {
+                <li class="filter" data-filter=@item.LOAI_ID>
+
+                    @*@item.LOAI_TEN*@
+                    @Html.ActionLink(item.LOAI_TEN, "Index", new { id = item.LOAI_ID })
+                </li>
+
+            }
+        <li class="filter">
+            @Html.ActionLink("Xem thêm", "DanhSachDiaDiem", "KH_DiaDiem")
+        </li>
+
+        </ul>
+
+        <div id="single-project">
+            @Html.Raw(ViewBag.View2)
+
+        </div>
+
+
+        <ul id="portfolio-grid" class="thumbnails row">
+            @Html.Raw(ViewBag.View)
+
+        </ul>
+        <ul class="nav nav-pills" style="float: right">
+            <li class="filter">
+                @Html.ActionLink("Xem thêm >>", "DanhSachDiaDiem", "KH_DiaDiem")
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+

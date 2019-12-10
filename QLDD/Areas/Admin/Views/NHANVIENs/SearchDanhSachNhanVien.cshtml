@@ -1,0 +1,64 @@
+﻿@model IEnumerable<QLDD.Models.NHANVIEN>
+@{
+    Layout = null;
+}
+
+<table class="table table-striped table-advance table-hover" id="result">
+    <tr>
+        <th style="background-color:#394A59;color:#fff">
+            HỌ TÊN NHÂN VIÊN
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            NGÀY SINH
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            ĐỊA CHỈ
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            GIỚI TÍNH
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            EMAIL
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            SỐ ĐIỆN THOẠI
+        </th>
+        <th style="background-color:#394A59;color:#fff">THAO TÁC</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NHANVIEN_TEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NHANVIEN_NGAYSINH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NHANVIEN_DIACHI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NHANVIEN_PHAI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NHANVIEN_EMAIL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NHANVIEN_SDT)
+            </td>
+            <td>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59;">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.NHANVIEN_ID })
+                </button>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Details", "Details", new { id = item.NHANVIEN_ID })
+                </button>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Delete", "Delete", new { id = item.NHANVIEN_ID })
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>

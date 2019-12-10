@@ -1,0 +1,43 @@
+﻿@model IEnumerable<QLDD.Models.DIADIEM>
+
+@{
+    Layout = null;
+}
+
+<div>
+    @{ var count = 1;}
+    <div class="row-fluid">
+        @foreach (var item in Model)
+        {
+            <div class="span3" style="border: solid 1px #eee; margin: 10px; background-color: #181A1C; height: 380px">
+                @{var hsp = (from h in item.HINHDIADIEMs orderby h.HDD_ID descending select h).Take(1).ToList();
+                    if (hsp.Count > 0)
+                    {
+                        <div class="thumbnail-diadiem-card" style="background-image: url(@hsp[0].HDD_LINK)"></div>
+                    }
+                    else
+                    {
+                        <div class="thumbnail-diadiem-card" style="background-image: url('/Assets/images/404_mask.png')"></div>
+                    }
+
+                }
+                <div style="padding: 10px; max-width: 270px">
+                    <a href="https://localhost:44340/KH_DiaDiem/ChitietDiaDiem/@item.DIADIEM_ID"><h4 style="color: #FECE1A">@Html.DisplayFor(modelItem => item.DIADIEM_TEN)</h4></a>
+                    <h6 style="color:#fff"> @Html.DisplayFor(modelItem => item.LOAI.LOAI_TEN)</h6>
+                    <h5 style="color: #fff">
+                        <img src="/Assets/images/pointer.png" />
+                        @Html.DisplayFor(modelItem => item.DIADIEM_DIACHI)
+                    </h5>
+                </div>
+
+            </div>
+            if (count % 4 == 0)
+            {
+            @:</div>
+            @:<div>
+            }
+            count++;
+        }
+    </div>
+
+</div>

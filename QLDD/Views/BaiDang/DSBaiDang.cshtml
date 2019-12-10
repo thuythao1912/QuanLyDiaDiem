@@ -1,0 +1,135 @@
+﻿@model  IEnumerable<QLDD.Models.BAIDANG>
+
+@{
+    Layout = null;
+}
+
+
+
+<div style="display: flex; align-items:center; justify-content:space-between; padding: 0px 15px">
+    <h3 style="color: #c82933"><strong>DANH SÁCH BÀI ĐĂNG</strong></h3>
+    <div>
+        <img src="~/Assets/images/add.png" width="25" height="25" />
+        <button class="btn btn-info" onclick="themBaiDang(@TempData["ID"], '@TempData["IDKH"]')">
+            Thêm bài đăng
+        </button>
+        <button class="btn btn-default">
+            @Html.ActionLink("Trở về", "DSDiaDiem", "DiaDiem", new { id = TempData["IDKH"] }, null)
+        </button>
+        <input class="form-control" id="txtSearch" type="text" placeholder="Nhập vào để tìm kiếm.." style="margin:auto">
+    </div>
+</div>
+<table width="100%" class="table table-hover" id="tbBaiDang" style="margin-top:10px">
+    <tr>
+        <th width="23%">
+            NGÀY ĐĂNG
+        </th>
+        <th width="12%">
+            TRẠNG THÁI
+        </th>
+        <th width="50%">
+            NỘI DUNG
+        </th>
+
+        <th width="15%"> THAO TÁC</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.BAIDANG_NGAY)
+            </td>
+            <td align="center">
+                @{ if (item.BAIDANG_DUYET == 1)
+                    {
+                        <span>Đã duyệt</span>
+                    }
+                    else
+                    {
+                        <span>Chưa duyệt</span>
+                    }
+                }
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.BAIDANG_NOIDUNG)
+            </td>
+
+
+            <td align="center">
+                <button class="btn btn-warning" onclick="suaBaiDang(@item.BAIDANG_ID, @TempData["ID"], '@TempData["IDKH"]')">
+                    Sửa
+                </button>
+                <button class="btn btn-danger" onclick="xoaBaiDang(@item.BAIDANG_ID, @TempData["ID"], '@TempData["IDKH"]')">
+                    Xóa
+                </button>
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+
+    //them bai dang
+    function themBaiDang(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/baidang/CreateBD',
+            data: { id: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+    //sua bai dang
+    function suaBaiDang(bd, dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/baidang/EditBD',
+            data: { id: bd, iddd: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+
+    //xoa bai dang
+    function xoaBaiDang(bd, dd, kh) {
+        var ans = confirm("Bạn có muốn xóa bài đăng này ?");
+        if (ans) {
+            $.ajax({
+                method: 'get',
+                url: '/BaiDang/DeleteBD',
+                data: { id: bd, iddd: dd, idkh: kh },
+                success: function () {
+                    alert("Xóa thành công!");
+                    //get bai dang
+                    $.ajax({
+                        method: 'get',
+                        url: '/baidang/dsbaidang',
+                        data: { id: dd, idkh: kh },
+                        success: function (res) {
+                            $("#result").html(res);
+                        }
+                    })
+                }
+
+            })
+        }
+    }
+    //on load
+    $(document).ready(function () {
+        //table bai dang
+        $("#txtSearch").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#tbBaiDang tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+</script>

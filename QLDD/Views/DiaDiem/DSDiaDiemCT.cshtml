@@ -1,0 +1,62 @@
+﻿@model IEnumerable<QLDD.Models.DIADIEM>
+
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <div class="span10" style="border: solid 1px #eee;">
+        <div style="display: flex; align-items:center; justify-content:space-between; border-bottom: solid 1px #eee; padding: 0px 15px">
+            <h3 style="color: #c82933"><strong>THÔNG TIN ĐỊA ĐIỂM</strong></h3>
+            <div>
+                <button class="btn btn-default">
+                    @Html.ActionLink("Trở về", "DSDiaDiem", "DiaDiem", new { id = TempData["IDKH"] }, null)
+                </button>
+            </div>
+        </div>
+        <div style="padding: 5px 15px; border-bottom: solid 1px #eee;">
+            <table width="100%">
+                <tr>
+                    <th width="30%" style="padding: 10px 0px">Tên địa điểm</th>
+                    <td>@Html.DisplayFor(modelItem => item.DIADIEM_TEN)</td>
+                </tr>
+                <tr>
+                    <th width="30%" style="padding: 10px 0px">Loại địa điểm</th>
+                    <td>@Html.DisplayFor(modelItem => item.LOAI.LOAI_TEN)</td>
+                </tr>
+                <tr>
+                    <th width="30%" style="padding: 10px 0px">Địa chỉ</th>
+                    <td>@Html.DisplayFor(modelItem => item.DIADIEM_DIACHI)</td>
+                </tr>
+                <tr>
+                    <th width="30%" style="padding: 10px 0px">Website</th>
+                    <td>@Html.DisplayFor(modelItem => item.DIADIEM_WEB)</td>
+                </tr>
+                <tr>
+                    <th width="30%" style="padding: 10px 0px">Mô tả</th>
+                    <td>@Html.DisplayFor(modelItem => item.DIADIEM_MOTA)</td>
+                </tr>
+            </table>
+        </div>
+        <div style="padding: 10px; display:flex; justify-content:center">
+            <button class="btn btn-warning" onclick="suaDiaDiem(@item.DIADIEM_ID, '@item.KHACHHANG_ID')">
+                Cập nhật thông tin
+            </button>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    //sua dia diem
+    function suaDiaDiem(dd, kh) {
+        $.ajax({
+            method: 'get',
+            url: '/diadiem/EditDD',
+            data: { id: dd, idkh: kh },
+            success: function (res) {
+                $("#result").html(res);
+            }
+        })
+    }
+</script>

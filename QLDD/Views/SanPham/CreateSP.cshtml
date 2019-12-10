@@ -1,0 +1,68 @@
+﻿@model QLDD.Models.SANPHAM
+
+@{
+    ViewBag.Title = "CreateSP";
+    Layout = null;
+}
+    <div class="span8" style="border: solid 1px #eee;">
+        <div style="display: flex; align-items:center; justify-content:space-between; border-bottom: solid 1px #eee; padding: 0px 15px">
+            <h3 style="color: #c82933"><strong>THÊM SẢN PHẨM MỚI</strong></h3>
+            <button class="btn btn-default" onclick="getSanPham(@TempData["ID"], '@TempData["IDKH"]' )">
+                Trở về
+            </button>
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group" style="padding: 10px">
+            <label class="control-label col-sm-2" style="padding-right:10px"><strong>TÊN SẢN PHẨM</strong></label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SANPHAM_TEN, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.SANPHAM_TEN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" style="padding: 10px">
+            <label class="control-label col-sm-2" style="padding-right:10px"><strong>GIÁ</strong></label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SANPHAM_GIA, new { htmlAttributes = new { @class = "form-control", @required = "required"  }})
+                @Html.ValidationMessageFor(model => model.SANPHAM_GIA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" style="padding: 10px">
+            <label class="control-label col-sm-2" style="padding-right:10px"><strong>MÔ TẢ</strong></label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.SANPHAM_MOTA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SANPHAM_MOTA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" style="padding: 10px; display:flex; justify-content:center">
+          <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="Lưu" class="btn btn-warning" />
+            </div>
+        </div>
+    </div>
+        }
+
+    </div>
+
+        
+        <script src="~/Scripts/jquery-3.3.1.js"></script>
+        <script>
+            //get san pham
+            function getSanPham(dd, kh) {
+                $.ajax({
+                    method: 'get',
+                    url: '/sanpham/dssanpham',
+                    data: { id: dd, idkh: kh },
+                    success: function (res) {
+                        $("#result").html(res);
+                    }
+                })
+            }
+        </script>

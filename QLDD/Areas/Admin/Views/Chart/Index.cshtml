@@ -1,0 +1,205 @@
+﻿@using QLDD.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    QUANLYDIADIEMEntities db = new QUANLYDIADIEMEntities();
+}
+
+
+
+<script src="/Areas/Admin/Assets/chart-master/Chart.js"></script>
+
+<style>
+
+    canvas1 {
+        float: right
+    }
+</style>
+
+<canvas id="canvas1" height="450" width="600"></canvas>
+@{
+    // Can tho
+    int t_CT_1 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("TP.Cần Thơ") && ct.LOAI_ID == 1).Count();
+    int t_CT_2 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("TP.Cần Thơ") && ct.LOAI_ID == 2).Count();
+    int t_CT_3 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("TP.Cần Thơ") && ct.LOAI_ID == 3).Count();
+    int t_CT_4 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("TP.Cần Thơ") && ct.LOAI_ID == 4).Count();
+    int t_CT_5 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("TP.Cần Thơ") && ct.LOAI_ID == 5).Count();
+    int t_CT_6 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("TP.Cần Thơ") && ct.LOAI_ID == 6).Count();
+
+    // hcm
+
+    int t_HCM_1 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("TP. Hồ Chí Minh") && ct.LOAI_ID == 1).Count();
+    int t_HCM_2 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("TP. Hồ Chí Minh") && ct.LOAI_ID == 2).Count();
+    int t_HCM_3 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("TP. Hồ Chí Minh") && ct.LOAI_ID == 3).Count();
+    int t_HCM_4 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("TP. Hồ Chí Minh") && ct.LOAI_ID == 4).Count();
+    int t_HCM_5 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("TP. Hồ Chí Minh") && ct.LOAI_ID == 5).Count();
+    int t_HCM_6 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("TP. Hồ Chí Minh") && ct.LOAI_ID == 6).Count();
+    //dn
+    int t_DN_1 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("Đà Nẵng") && ct.LOAI_ID == 1).Count();
+    int t_DN_2 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("Đà Nẵng") && ct.LOAI_ID == 2).Count();
+    int t_DN_3 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("Đà Nẵng") && ct.LOAI_ID == 3).Count();
+    int t_DN_4 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("Đà Nẵng") && ct.LOAI_ID == 4).Count();
+    int t_DN_5 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("Đà Nẵng") && ct.LOAI_ID == 5).Count();
+    int t_DN_6 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("Đà Nẵng") && ct.LOAI_ID == 6).Count();
+    //hn
+    int t_HN_1 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("Hà Nội") && ct.LOAI_ID == 1).Count();
+    int t_HN_2 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("Hà Nội") && ct.LOAI_ID == 2).Count();
+    int t_HN_3 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("Hà Nội") && ct.LOAI_ID == 3).Count();
+    int t_HN_4 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("Hà Nội") && ct.LOAI_ID == 4).Count();
+    int t_HN_5 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("Hà Nội") && ct.LOAI_ID == 5).Count();
+    int t_HN_6 = (from ct in db.DIADIEMs select ct).Where(ct => ct.DIADIEM_DIACHI.Contains("Hà Nội") && ct.LOAI_ID == 6).Count();
+}
+
+<script>
+
+    var barChartData = {
+        labels: ["Nhà hàng", "Quán nước", "Khu vui chơi", "Khu DLST", "Homestay", "Quán ăn"],
+        datasets: [
+
+            {
+                fillColor: "#066368",
+                strokeColor: "rgba(220,220,220,1)",
+                data: [@t_CT_1, @t_CT_2, @t_CT_3, @t_CT_4, @t_CT_5, @t_CT_6]
+            },
+            {
+                fillColor: "#43FF50",
+                strokeColor: "rgba(220,220,220,1)",
+                data: [@t_HCM_1, @t_HCM_2, @t_HCM_3, @t_HCM_4, @t_HCM_5, @t_HCM_6]
+            },
+            {
+                fillColor: "#F65C2A",
+                strokeColor: "rgba(220,220,220,1)",
+                data: [@t_DN_1, @t_DN_2, @t_DN_3,@t_DN_4, @t_DN_5, @t_DN_6]
+            },
+            {
+                fillColor: "#1A75BC",
+                strokeColor: "rgba(151,187,205,1)",
+                data: [@t_HN_1, @t_HN_2, @t_HN_3, @t_HN_4, @t_HN_5, @t_HN_6]
+            }
+
+        ]
+    }
+
+    var myLine = new Chart(document.getElementById("canvas1").getContext("2d")).Bar(barChartData);
+
+</script>
+
+<style>
+
+    canvas2 {
+        float: left
+    }
+</style>
+
+<canvas id="canvas2" height="450" width="450"></canvas>
+@{
+    int total = (from t in db.DIADIEMs select t).Count();
+    int t_nhahang = (from n in db.DIADIEMs where n.LOAI_ID == 1 select n).Count();
+    var t_quannuoc = (from q in db.DIADIEMs where q.LOAI_ID == 2 select q).Count();
+    var t_khuvuichoi = (from k in db.DIADIEMs where k.LOAI_ID == 3 select k).Count();
+    var t_KDLST = (from q in db.DIADIEMs where q.LOAI_ID == 4 select q).Count();
+    var t_homestay = (from k in db.DIADIEMs where k.LOAI_ID == 5 select k).Count();
+    var t_quanan = (from k in db.DIADIEMs where k.LOAI_ID == 6 select k).Count();
+
+    float nhahang = (t_nhahang * 100) / total;
+    float quannuoc = (t_quannuoc * 100) / total;
+    float khuvuichoi = (t_khuvuichoi * 100) / total;
+    float kdlst = (t_KDLST * 100) / total;
+    float homestay = (t_homestay * 100) / total;
+    float quanan = (t_quanan * 100) / total;
+
+
+}
+
+
+<script>
+
+        var pieData = [
+            {
+                value: @nhahang,
+                color: "#F38630"
+            },
+            {
+                value: @quannuoc,
+                color: "#E0E4CC"
+            },
+            {
+                value: @khuvuichoi,
+                color: "#066368"
+            },
+            {
+                value: @kdlst,
+                color: "#F65C2A"
+            },
+            {
+                value: @homestay,
+                color: "#F5A9F2"
+            },
+
+            {
+                value: @quanan,
+                color: "#69D2E7"
+            }
+
+        ];
+
+    var myPie = new Chart(document.getElementById("canvas2").getContext("2d")).Pie(pieData);
+    @{ 
+        var qa = 100 - @nhahang - @quannuoc - @khuvuichoi - @kdlst - @homestay;
+    }
+</script>
+<div style="display: flex">
+    <div class="col-sm-6">
+        <div style="display: flex; margin-bottom: 10px;margin-top:10px;font-style:italic;font-size:20px;font-weight:bold">
+           Biểu đồ thể hiện số lượng loại hình dịch vụ theo khu vực.
+        </div>
+        <div style="display: flex; margin-bottom: 5px">
+            <div style="background-color: #066368; width: 20px; height: 20px; margin-right: 5px"></div>
+            <div>TP. Cần Thơ</div>
+        </div>
+        <div style="display: flex; margin-bottom: 5px">
+            <div style="background-color: #43FF50; width: 20px; height: 20px; margin-right: 5px"></div>
+            <div>TP. Hồ Chí Minh</div>
+        </div>
+        <div style="display: flex; margin-bottom: 5px">
+            <div style="background-color: #F65C2A; width: 20px; height: 20px; margin-right: 5px"></div>
+            <div>Đà Nẵng</div>
+        </div>
+        <div style="display: flex; margin-bottom: 5px">
+            <div style="background-color: #1A75BC; width: 20px; height: 20px; margin-right: 5px"></div>
+            <div>Hà Nội</div>
+        </div>
+
+
+    </div>
+    
+    <div class="col-sm-6">
+        <div style="display: flex; margin-bottom: 10px;margin-top:10px;font-style:italic;font-size:20px;font-weight:bold">
+            Biểu đồ thể hiện tỉ lệ các loại hình dịch vụ ở Duckdy.
+        </div>
+        <div style="display: flex; margin-bottom: 5px">
+            <div style="background-color: #F38630; width: 20px; height: 20px; margin-right: 5px"></div>
+            <div>Nhà hàng: @nhahang%</div>
+        </div>
+        <div style="display: flex; margin-bottom: 5px">
+            <div style="background-color: #E0E4CC; width: 20px; height: 20px; margin-right: 5px"></div>
+            <div>Quán nước: @quannuoc%</div>
+        </div>
+        <div style="display: flex; margin-bottom: 5px">
+            <div style="background-color: #066368; width: 20px; height: 20px; margin-right: 5px"></div>
+            <div>Khu vui chơi: @khuvuichoi%</div>
+        </div>
+        <div style="display: flex; margin-bottom: 5px">
+            <div style="background-color: #F65C2A; width: 20px; height: 20px; margin-right: 5px"></div>
+            <div>Khu du lịch sinh thái: @kdlst%</div>
+        </div>
+        <div style="display: flex; margin-bottom: 5px">
+            <div style="background-color: #F5A9F2; width: 20px; height: 20px; margin-right: 5px"></div>
+            <div>Homestay: @homestay%</div>
+        </div>
+        <div style="display: flex; margin-bottom: 5px">
+            <div style="background-color: #69D2E7; width: 20px; height: 20px; margin-right: 5px"></div>
+            <div>Quán ăn: @qa% </div>
+        </div>
+    </div>
+</div>

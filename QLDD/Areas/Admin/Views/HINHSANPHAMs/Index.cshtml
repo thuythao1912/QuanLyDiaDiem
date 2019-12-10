@@ -1,0 +1,77 @@
+﻿@model IPagedList<QLDD.Models.HINHSANPHAM>
+@using PagedList
+@using PagedList.Mvc
+@using QLDD.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var db = new QUANLYDIADIEMEntities();
+
+    var listSanPham = (from hsp in db.HINHSANPHAMs join sp in db.SANPHAMs on hsp.SANPHAM_ID equals sp.SANPHAM_ID select sp.SANPHAM_TEN).Distinct();
+    //var listTenSanPham = (from sp in db.SANPHAMs where sp.SANPHAM_ID == listselect sp.SANPHAM_TEN ;
+}
+
+<h2>DANH SÁCH HÌNH ẢNH THEO SẢN PHẨM</h2>
+<script>
+    function showInfo() {
+        var cbodiadiem = $("#cbodiadiem").val();
+        console.log(cbodiadiem);
+        $.ajax({
+            type: 'GET',
+            url: '/Admin/HINHSANPHAMs/lochinhsanpham',
+            data: { strdiadiem: cbodiadiem },
+            success: function (response) {
+                $("#result").html(response);
+                console.log(response);
+            }
+        });
+    }
+</script>
+<select id="cbodiadiem" class="form-control" style="width:300px;margin-bottom:20px" onchange="showInfo()">
+
+    <option value="">Tất cả</option>
+    @foreach (var sanpham in listSanPham)
+    {
+        <option value='@sanpham'>@sanpham</option>
+    }
+
+</select>
+<table class="table table-striped table-advance table-hover" id="result">
+    <tr>
+        <th style="background-color:#394A59;color:#fff">
+            HÌNH ẢNH
+        </th>
+        <th style="background-color:#394A59;color:#fff">
+            TÊN SẢN PHẨM
+        </th>
+        <th style="background-color:#394A59;color:#fff">THAO TÁC</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.HSP_LINK)" width="120px" height="100px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SANPHAM.SANPHAM_TEN)
+            </td>
+            <td>
+                @*<button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59;">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.HSP_ID })
+                </button>
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Details", "Details", new { id = item.HSP_ID })
+                </button>*@
+                <button class="btn btn-primary" style="width:60px;height:32px;background-color:#394A59">
+                    @Html.ActionLink("Delete", "Delete", new { id = item.HSP_ID })
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
